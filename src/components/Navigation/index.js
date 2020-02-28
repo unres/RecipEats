@@ -13,6 +13,12 @@ const Navigation = () => (
       <li>
         <Link to={ROUTES.ACCOUNT}>Account</Link>
       </li>
+      <li>
+        <Link to={ROUTES.RECIPE}>Recipe</Link>
+      </li>
+      <li>
+        <Link to={ROUTES.COOKBOOK}>Cookbook</Link>
+      </li>
     </ul>
   </div>
 );
