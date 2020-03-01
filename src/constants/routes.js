@@ -6,3 +6,4 @@ export const SIGN_UP = '/signup';
 export const SIGN_IN = '/signin';
 export const RECIPE = '/recipe';
 export const COOKBOOK = '/cookbook';
+export const ADMIN = '/admin';
