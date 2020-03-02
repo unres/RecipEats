@@ -35,7 +35,8 @@ const NavigationAuth = () => (
 );
 
 const NavigationNonAuth = () => (
-  <Menu>
+  <Menu borderless size='huge'>
+    <Menu.Item header>RecipEats</Menu.Item>
      <Modal trigger={ <Menu.Item position='right' name='Sign In' /> }>
         <Modal.Content>
           <SignInForm />
