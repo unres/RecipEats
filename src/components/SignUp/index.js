@@ -72,9 +72,8 @@ class SignUpFormBase extends Component {
 
         <Form.Input label="Email" placeholder="test@gmail.com" name='email' onChange={this.onChange} />
 
-         <Form.Input label="Password" placeholder="****" name='passwordOne' onChange={this.onChange} />
-         <Form.Input label="Re-enter  Password" placeholder="****" name='passwordTwo' onChange={this.onChange} />
-
+         <Form.Input label="Password" placeholder="******" name='passwordOne' type='password' onChange={this.onChange} />
+         <Form.Input label="Re-enter  Password" placeholder="******" name='passwordTwo' type='password' onChange={this.onChange} />
 
         <Button disabled={isInvalid} type="submit">
             Sign Up

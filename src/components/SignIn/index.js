@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Form } from 'semantic-ui-react';
 
 import { compose } from 'recompose';
 
@@ -50,26 +51,15 @@ class SignInFormBase extends Component {
     const { email, password, error } = this.state;
     const isInvalid = password === '' || email === '';
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
+      <Form onSubmit={this.onSubmit}>
+          <Form.Input name='email' placeholder='Billy@yahoo.com' label='Email'  onChange={this.onChange} />
+          <Form.Input name='password' placeholder='******' label='Password' type='password' onChange={this.onChange} />
+        
+          <button disabled={isInvalid} type="submit">
           Sign In
-        </button>
+          </button>
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }

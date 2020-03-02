@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react'
+import { Menu, Modal } from 'semantic-ui-react'
 
 import SignOutButton from '../SignOut';
+import SignInForm from '../SignIn';
 import * as ROUTES from '../../constants/routes';
 
 import { AuthUserContext } from '../Session';
@@ -35,11 +36,11 @@ const NavigationAuth = () => (
 
 const NavigationNonAuth = () => (
   <Menu>
-    <Link to={ROUTES.SIGN_IN}>
-    <Menu.Item
-      name='Sign In'
-    />
-    </Link>
+     <Modal trigger={ <Menu.Item position='right' name='Sign In' /> }>
+        <Modal.Content>
+          <SignInForm />
+        </Modal.Content>
+    </Modal>
 </Menu>
 );
 
