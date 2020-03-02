@@ -19,11 +19,6 @@ const Navigation = () => (
 
 const NavigationAuth = () => (
   <Menu>
-    <Link to={ROUTES.LANDING}>
-    <Menu.Item
-      name='Landing'
-    />
-    </Link>
     <Link to={ROUTES.HOME}>
    <Menu.Item
       name='Home'
@@ -40,11 +35,6 @@ const NavigationAuth = () => (
 
 const NavigationNonAuth = () => (
   <Menu>
-    <Link to={ROUTES.SIGN_IN}>
-    <Menu.Item
-      name='Sign In'
-    />
-    </Link>
     <Link to={ROUTES.SIGN_UP}>
     <Menu.Item
       name='Sign Up'
