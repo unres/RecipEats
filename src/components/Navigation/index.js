@@ -35,9 +35,9 @@ const NavigationAuth = () => (
 
 const NavigationNonAuth = () => (
   <Menu>
-    <Link to={ROUTES.SIGN_UP}>
+    <Link to={ROUTES.SIGN_IN}>
     <Menu.Item
-      name='Sign Up'
+      name='Sign In'
     />
     </Link>
 </Menu>
