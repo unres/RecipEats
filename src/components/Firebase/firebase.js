@@ -39,6 +39,18 @@ const config = {
         user = uid => this.db.ref(`users/${uid}`);
         
         users = () => this.db.ref('users');
+
+        // *** Recipe API ***
+
+        recipe = rid => this.db.ref(`recipes/${rid}`);
+
+        recipes = () => this.db.ref('recipes');
+
+        // *** Cookbook API ***
+
+        cookbook = cid => this.db.ref(`cookbooks/${cid}`);
+
+        cookbooks = () => this.db.ref('cookbooks');
   }
 
 export default Firebase;
