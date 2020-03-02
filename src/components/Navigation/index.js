@@ -21,16 +21,21 @@ const Navigation = () => (
 const NavigationAuth = () => (
   <Menu>
     <Link to={ROUTES.HOME}>
-   <Menu.Item
-      name='Home'
-     />
-     </Link>
-     <Link to={ROUTES.ACCOUNT}>
-   <Menu.Item
-      name='Account'
-     />
-     </Link>
-     <SignOutButton />
+      <Menu.Item
+        name='Home'
+      />
+    </Link>
+    <Link to={ROUTES.ACCOUNT}>
+      <Menu.Item
+        name='Account'
+      />
+    </Link>
+    <Link to={ROUTES.RECIPE}>
+      <Menu.Item
+        name='Recipes'
+      />
+    </Link>
+    <SignOutButton />
   </Menu>
 );
 
