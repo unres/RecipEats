@@ -7,7 +7,7 @@ class Landing extends Component {
   render() {
     return (
       <div>
-        <Grid columns={2}>
+        <Grid padded  columns={2}>
           <Grid.Row>
 
             <Grid.Column>
