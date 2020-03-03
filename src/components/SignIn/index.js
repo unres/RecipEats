@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import { Form } from 'semantic-ui-react';
+import { withRouter, Link } from 'react-router-dom';
+import { Form, Modal } from 'semantic-ui-react';
 
 import { compose } from 'recompose';
-import { PasswordForgetLink } from '../PasswordForget';
+import { PasswordForgetForm } from '../PasswordForget';
 
 import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
@@ -15,7 +15,11 @@ const SignInPage = () => (
     <h1>SignIn</h1>
     <SignInForm />
     <SignUpLink />
-    <PasswordForgetLink />
+    <Modal  trigger={ <Link>Forgot Password?</Link>}>
+      <Modal.Content>
+       <PasswordForgetForm />
+      </Modal.Content>
+    </Modal>
   </div>
 );
 

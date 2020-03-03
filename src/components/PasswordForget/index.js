@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Form } from 'semantic-ui-react';
+
 import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
-const PasswordForgetPage = () => (
-  <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
-  </div>
-);
+
 const INITIAL_STATE = {
   email: '',
   error: null,
@@ -36,8 +31,8 @@ class PasswordForgetFormBase extends Component {
     const { email, error } = this.state;
     const isInvalid = email === '';
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
+      <Form onSubmit={this.onSubmit}>
+        <Form.Input
           name="email"
           value={this.state.email}
           onChange={this.onChange}
@@ -48,15 +43,10 @@ class PasswordForgetFormBase extends Component {
           Reset My Password
         </button>
         {error && <p>{error.message}</p>}
-      </form>
+      </Form>
     );
   }
 }
-const PasswordForgetLink = () => (
-  <p>
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
-  </p>
-);
-export default PasswordForgetPage;
+
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
-export { PasswordForgetForm, PasswordForgetLink };
+export { PasswordForgetForm };
