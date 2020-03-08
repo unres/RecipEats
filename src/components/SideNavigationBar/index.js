@@ -6,6 +6,8 @@ import { Menu } from 'semantic-ui-react';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 
+import "../SideNavigationBar/sideBar.css"
+
 const SideNavigationBar = () => (
     <div>
       <AuthUserContext.Consumer>
@@ -17,7 +19,7 @@ const SideNavigationBar = () => (
   );
 
   const SideNavigationAuth = () => (
-    <Menu vertical>
+    <Menu vertical fixed='left' className='side-nav'>
         <Link to={ROUTES.DISCOVER}>
           <Menu.Item
             name='Discover'

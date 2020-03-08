@@ -17,13 +17,13 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <Menu>
+  <Menu borderless size='massive'>
     <SignOutButton />
   </Menu>
 );
 
 const NavigationNonAuth = () => (
-  <Menu borderless size='huge'>
+  <Menu borderless size='massive'>
     <Menu.Item header>RecipEats</Menu.Item>
      <Modal trigger={ <Menu.Item position='right' name='Sign In' /> }>
         <Modal.Content>

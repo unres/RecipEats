@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Grid } from 'semantic-ui-react';
 
 import Navigation from '../Navigation';
 import SideNavigationBar from '../SideNavigationBar';
@@ -16,17 +15,15 @@ const App = () => (
   <Router>
     <div>
       <Navigation />
-      <Grid.Row>
-        <Grid.Column>
-          <SideNavigationBar />
-        </Grid.Column>
-        <Grid.Column>
-          <Route exact path={ROUTES.LANDING} component={LandingPage} />
-          <Route path={ROUTES.DISCOVER} component={HomePage} />
-          <Route path={ROUTES.RECIPE} component={RecipePage} />
-          <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-       </Grid.Column>
-      </Grid.Row>
+
+      <SideNavigationBar />
+
+      <Route exact path={ROUTES.LANDING} component={LandingPage} />
+
+      <Route path={ROUTES.DISCOVER} component={HomePage} />
+      <Route path={ROUTES.RECIPE} component={RecipePage} />
+      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+
     </div>
   </Router>
 );
