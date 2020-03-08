@@ -1,7 +1,10 @@
 import React from 'react';
+
+import '../Account/account.css'
+
 const Account = () => (
-  <div>
-    <h1>Cookbook</h1>
+  <div className='account'>
+    <h1>Account</h1>
   </div>
 );
 export default Account;

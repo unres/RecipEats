@@ -1,4 +1,7 @@
 import React from 'react';
+
+import '../Recipe/recipe.css';
+
 import Modal from "../Modal";
 import { Button } from 'semantic-ui-react';
 
