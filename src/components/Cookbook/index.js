@@ -1,6 +1,9 @@
 import React from 'react';
+
+import '../Cookbook/cookbook.css'
+
 const Cookbook = () => (
-  <div>
+  <div className='cookbook'>
     <h1>Cookbook</h1>
   </div>
 );

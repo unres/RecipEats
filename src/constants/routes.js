@@ -1,7 +1,7 @@
 export const LANDING = '/';
-export const HOME = '/home';
-export const ACCOUNT = '/account';
-export const PASSWORD_FORGET = '/pw-forget';
-export const RECIPE = '/recipe';
+export const DISCOVER = '/discover';
 export const COOKBOOK = '/cookbook';
-export const ADMIN = '/admin';
+export const RECIPE = '/recipe';
+export const MEAL_PLANNER = '/meal-planner';
+export const GROCERY_LIST = '/grocery-list';
+export const ACCOUNT = '/account';
