@@ -14,7 +14,8 @@ const INITIAL_STATE = {
   instructions: [''],
   share: false,
   userID: "",
-  collaborators: [1]
+  collaborators: [1],
+  showModal: false
 }
 
 class Recipe extends React.Component{
@@ -68,10 +69,15 @@ class Recipe extends React.Component{
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  closeModal = () => {
+    this.setState({ showModal: false })
+  }
+
   render() {
+    const { showModal } = this.state;
     return (
       <div className='recipe'>
-        <Modal trigger={<Button>Create a Recipe</Button>}>
+        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
           <Modal.Header>Create a Recipe</Modal.Header>
           <Modal.Content image>
             <Image wrapped size='medium' src='https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_960_720.png' />
