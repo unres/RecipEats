@@ -14,8 +14,9 @@ const INITIAL_STATE = {
   instructions: [''],
   share: false,
   userID: "",
-  collaborators: [1],
-  showModal: false
+  collaborators: [''],
+  showModal: false,
+  showCollaborators: false
 }
 
 class Recipe extends React.Component{
@@ -25,12 +26,12 @@ class Recipe extends React.Component{
     this.state = { ...INITIAL_STATE };
   }
 
-  toggle = () => this.setState((prevState) => ({ share: !prevState.share }));
-
+  /*
   fetchUID(){
     this.setState({userID: this.props.firebase.auth.currentUser.uid});
     console.log(this.state);
   }
+  */
 
   componentDidMount() {
     this.authSubscription = this.props.firebase.auth.onAuthStateChanged((userID) => {
@@ -74,7 +75,7 @@ class Recipe extends React.Component{
   }
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, showCollaborators } = this.state;
     return (
       <div className='recipe'>
         <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
@@ -98,8 +99,14 @@ class Recipe extends React.Component{
                 <Form.TextArea label='Ingredients' placeholder='Ingredients' name='ingredients' onChange={this.onChange} />
                 <Form.TextArea label='Instructions' placeholder='Instructions' name='instructions' onChange={this.onChange} />
                 <Form.Input name='share' onChange={this.onChange}>
-                  <Checkbox label='Share recipe' onClick={this.toggle} checked={this.state.share} />
+                  <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
                 </Form.Input>
+                { showCollaborators 
+                  ? <div>
+                      <Form.TextArea label='Collaborators' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
+                    </div>
+                  : null
+                } 
                 <Button type='submit'>Submit</Button>
               </Form>
             </Modal.Description>
