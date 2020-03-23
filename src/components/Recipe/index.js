@@ -84,26 +84,17 @@ class Recipe extends React.Component{
             <Image wrapped size='medium' src='https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_960_720.png' />
             <Modal.Description>
               <Form onSubmit={this.onSubmit}>
-                <Form.Input name='title' onChange={this.onChange}>
-                  <label>Title</label>
-                  <input placeholder='Title' />
-                </Form.Input>
-                <Form.Input name='description' onChange={this.onChange}>
-                  <label>Description</label>
-                  <input placeholder='Description' />
-                </Form.Input>
-                <Form.Input name='portionSize' onChange={this.onChange}>
-                  <label>Portion Size</label>
-                  <input placeholder='Portion Size' />
-                </Form.Input>
-                <Form.TextArea label='Ingredients' placeholder='Ingredients' name='ingredients' onChange={this.onChange} />
-                <Form.TextArea label='Instructions' placeholder='Instructions' name='instructions' onChange={this.onChange} />
+                <Form.Input name='title' onChange={this.onChange} label='Title' placeholder='Title' />
+                <Form.Input name='description' onChange={this.onChange} label='Description' placeholder='Description' />
+                <Form.Input name='portionSize' onChange={this.onChange} label='Portion Size' placeholder='Portion Size' />
+                <Form.TextArea label='Ingredients (separate ingredients by a new line)' placeholder='Ingredients' name='ingredients' onChange={this.onChange} />
+                <Form.TextArea label='Instructions (separate instructions by a new line)' placeholder='Instructions' name='instructions' onChange={this.onChange} />
                 <Form.Input name='share' onChange={this.onChange}>
                   <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
                 </Form.Input>
                 { showCollaborators 
                   ? <div>
-                      <Form.TextArea label='Collaborators' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
+                      <Form.TextArea label='Collaborators (separate users by a new line)' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
                     </div>
                   : null
                 } 
