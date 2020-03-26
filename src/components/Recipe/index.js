@@ -24,38 +24,13 @@ class Recipe extends React.Component{
     super(props);
 
     this.state = { ...INITIAL_STATE };
+    this.writeToDB = this.writeToDB.bind(this);
   }
 
-  /*
-  fetchUID(){
-    this.setState({userID: this.props.firebase.auth.currentUser.uid});
-    console.log(this.state);
-  }
-  */
-
-  componentDidMount() {
-    this.authSubscription = this.props.firebase.auth.onAuthStateChanged((userID) => {
-      this.setState({
-        userID
-      });
-    });
-  }
-
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
-  onSubmit = event => {
-    const { title, description, portionSize, ingredients, instructions, share, userID, collaborators } = this.state;
+  writeToDB() {
     return this.props.firebase.recipe(test)
       .set({
-        title, 
-        description, 
-        portionSize, 
-        ingredients, 
-        instructions, 
-        share, 
-        collaborators
+        ...this.state
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
@@ -64,6 +39,10 @@ class Recipe extends React.Component{
       .catch(error => {
         this.setState({ error });
       });
+  }
+
+  onSubmit = event => {
+    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB)
   };
 
   onChange = event => {
