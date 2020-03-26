@@ -40,6 +40,8 @@ const config = {
         
         users = () => this.db.ref('users');
 
+        getUID = () => this.auth.currentUser.uid;
+
         // *** Recipe API ***
 
         recipe = rid => this.db.ref(`recipes/${rid}`);
