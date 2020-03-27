@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Modal, Image, Checkbox, Form } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import './recipe.css';
+
 
 const test = '01';
 
@@ -56,7 +56,7 @@ class RecipeCreate extends React.Component{
   render() {
     const { showModal, showCollaborators } = this.state;
     return (
-      <div className='recipe'>
+      <div>
         <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
           <Modal.Header>Create a Recipe</Modal.Header>
           <Modal.Content image>

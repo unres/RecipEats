@@ -1,11 +1,12 @@
 import React from 'react';
-import RecipeCreate from '../RecipeCreate';
-import RecipeRead from '../RecipeRead';
+import RecipeCreate from './recipeCreate.js';
+import RecipeRead from './recipeRead.js';
+import './recipe.css';
 
 class Recipe extends React.Component{
   render() {
     return (
-      <div>
+      <div className='recipe'>
         <RecipeCreate />
         <RecipeRead />
       </div>
