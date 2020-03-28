@@ -38,7 +38,7 @@ class RecipeRead extends Component {
 
         return (
             <div>
-                <h1>Recipes</h1>
+                <h1>Your Recipes</h1>
 
                 {loading && <div>Loading...</div>}
 
@@ -52,9 +52,24 @@ const RecipeList = ({ recipes }) => (
     <ul>
         {recipes.map(recipe => (
             <li key={recipe.uid}>
-                <span>
-                    <strong>ID:</strong> {recipe.uid}
-                </span>
+                <ul>
+                    <strong>Title:</strong> {recipe.title}
+                </ul>
+                <ul>
+                    <strong>Description:</strong> {recipe.description}
+                </ul>
+                <ul>
+                    <strong>Portion Size:</strong> {recipe.portionSize}
+                </ul>
+                <ul>
+                    <strong>Ingredients:</strong> {recipe.ingredients}
+                </ul>
+                <ul>
+                    <strong>Instructions:</strong> {recipe.instructions}
+                </ul>
+                <ul>
+                    <strong>Other Collaborators:</strong> {recipe.collaborators}
+                </ul>
             </li>
         ))}
     </ul>
