@@ -3,7 +3,6 @@ import { Button, Modal, Image, Checkbox, Form } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-
 const test = '01';
 
 const INITIAL_STATE = {
