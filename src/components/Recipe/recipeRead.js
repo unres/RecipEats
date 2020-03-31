@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
+import RecipeDelete from './recipeDelete.js';
+import RecipeUpdate from './recipeUpdate.js';
 
 class RecipeRead extends Component {
     constructor(props) {
@@ -43,6 +45,8 @@ class RecipeRead extends Component {
                 {loading && <div>Loading...</div>}
 
                 <RecipeList recipes={recipes} />
+                <RecipeDelete />
+                <RecipeUpdate />
             </div>
         );
     }
