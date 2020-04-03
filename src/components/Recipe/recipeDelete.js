@@ -12,7 +12,7 @@ class RecipeDelete extends Component {
     }
 
     removeRecipe() {
-        this.props.firebase.recipes('01').remove();
+        this.props.firebase.recipe("01").remove();
     }
 
     render() {
