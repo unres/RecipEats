@@ -1,10 +1,15 @@
 import React from 'react';
+import { Header } from 'semantic-ui-react';
 
 import "../Discover/discover.css"
 
-const Home = () => (
-  <div className='discover'>
-    <h1>Discover</h1>
-  </div>
-);
-export default Home;
+class Discover extends React.Component{
+  render() {
+    return (
+      <div className='discover'>
+        <Header as='h1'>Discover Page</Header>
+      </div>
+    )
+  }
+}
+export default Discover;
