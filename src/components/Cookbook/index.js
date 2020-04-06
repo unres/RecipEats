@@ -61,7 +61,7 @@ class Cookbook extends React.Component{
 
   render() {
     return(
-      <div className='addCookBook'>
+      <div className='cookbook'>
         <Modal trigger={<Button size='massive'>Add New Cookbook</Button>}>
           <ModalHeader>Create a Cookbook</ModalHeader>
           <ModalDescription>
