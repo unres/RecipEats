@@ -48,7 +48,13 @@ class CookbookRead extends Component {
 const CookbookList = ({ cookbooks }) => (
     <List>
         {cookbooks.map(cookbook => (
-            <List.Item key={cookbook.uid}><List><Button>{cookbook.title}</Button></List></List.Item>
+            //<List.Item key={cookbook.uid}><List><Button>{cookbook.title}</Button></List></List.Item>
+            <List.Item key={cookbook.uid}>
+                <List>Title: {cookbook.title}</List>
+                <List>Description: {cookbook.description}</List>
+                <List>Public: {cookbook.public.toString()}</List>
+                <List>Recipes: {cookbook.recipes}</List>
+            </List.Item>
         ))}
     </List>
 )
