@@ -3,7 +3,8 @@ import { Button, Modal, Image, Checkbox, Form } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-const test = '01';
+var RID = "01";
+const min = 1000;
 
 const INITIAL_STATE = {
   title: '',
@@ -27,7 +28,7 @@ class RecipeCreate extends React.Component{
   }
 
   writeToDB() {
-    return this.props.firebase.recipe(test)
+    return this.props.firebase.recipe(RID)
       .set({
         ...this.state
       })
@@ -41,7 +42,8 @@ class RecipeCreate extends React.Component{
   }
 
   onSubmit = event => {
-    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB)
+    generateRID();
+    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB);
   };
 
   onChange = event => {
@@ -84,6 +86,10 @@ class RecipeCreate extends React.Component{
       </div>
     );
   }
+}
+
+const generateRID = () => {
+    RID = Date.now() + String( Math.floor(Math.random() * min));
 }
 
 export default withFirebase(RecipeCreate);
