@@ -7,12 +7,12 @@ class RecipeDelete extends Component {
         super(props);
 
         this.state = {
-            title: ''
+            rid: this.props.rid
         };
     }
 
     removeRecipe() {
-        this.props.firebase.recipe("01").remove();
+        this.props.firebase.recipe(this.state.rid).remove();
     }
 
     render() {
