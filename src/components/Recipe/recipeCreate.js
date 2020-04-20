@@ -13,8 +13,7 @@ const INITIAL_STATE = {
   ingredients: [''],
   instructions: [''],
   share: false,
-  userID: "",
-  collaborators: [''],
+  collaborators: [],
   dateCreated: '',
   showModal: false,
   showCollaborators: false
@@ -24,7 +23,7 @@ class RecipeCreate extends React.Component{
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = { ...INITIAL_STATE, userID: this.props.uid };
     this.writeToDB = this.writeToDB.bind(this);
   }
 
@@ -44,7 +43,7 @@ class RecipeCreate extends React.Component{
 
   onSubmit = event => {
     generateRID();
-    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB);
+    this.writeToDB();
   };
 
   onChange = event => {
