@@ -3,7 +3,8 @@ import { Button, Modal, Image, Checkbox, Form } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-const test = '01';
+var RID = "01";
+const min = 1000;
 
 const INITIAL_STATE = {
   title: '',
@@ -12,8 +13,8 @@ const INITIAL_STATE = {
   ingredients: [''],
   instructions: [''],
   share: false,
-  userID: "",
-  collaborators: [''],
+  collaborators: [],
+  dateCreated: '',
   showModal: false,
   showCollaborators: false
 }
@@ -22,12 +23,12 @@ class RecipeCreate extends React.Component{
   constructor(props) {
     super(props);
 
-    this.state = { ...INITIAL_STATE };
+    this.state = { ...INITIAL_STATE, userID: this.props.uid };
     this.writeToDB = this.writeToDB.bind(this);
   }
 
   writeToDB() {
-    return this.props.firebase.recipe(test)
+    return this.props.firebase.recipe(RID)
       .set({
         ...this.state
       })
@@ -41,7 +42,8 @@ class RecipeCreate extends React.Component{
   }
 
   onSubmit = event => {
-    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB)
+    generateRID();
+    this.writeToDB();
   };
 
   onChange = event => {
@@ -76,7 +78,7 @@ class RecipeCreate extends React.Component{
                     </div>
                   : null
                 } 
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' onClick={() => this.setState({ dateCreated: Date.now() })}>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>
@@ -84,6 +86,10 @@ class RecipeCreate extends React.Component{
       </div>
     );
   }
+}
+
+const generateRID = () => {
+    RID = Date.now() + String( Math.floor(Math.random() * min));
 }
 
 export default withFirebase(RecipeCreate);

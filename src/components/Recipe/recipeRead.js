@@ -9,7 +9,9 @@ class RecipeRead extends Component {
 
         this.state = {
             loading: false,
-            recipes: []
+            recipes: [],
+            userID: this.props.uid,
+            email: this.props.email
         };
     }
 
@@ -21,11 +23,18 @@ class RecipeRead extends Component {
 
             const recipesList = Object.keys(recipesObject).map(key => ({
                 ...recipesObject[key],
-                uid: key,
+                rid: key,
             }));
 
+            const userRecipes = [];
+
+            recipesList.map(recipe => {
+                if (recipe.userID === this.state.userID || (recipe.collaborators != null && recipe.collaborators.indexOf(this.state.email) > -1))
+                    userRecipes.push(recipe)
+            });
+
             this.setState({
-                recipes: recipesList,
+                recipes: userRecipes,
                 loading: false            
             });
         });
@@ -45,38 +54,40 @@ class RecipeRead extends Component {
                 {loading && <div>Loading...</div>}
 
                 <RecipeList recipes={recipes} />
-                <RecipeDelete />
-                <RecipeUpdate />
             </div>
         );
     }
 }
 
 const RecipeList = ({ recipes }) => (
-    <ul>
-        {recipes.map(recipe => (
-            <li key={recipe.uid}>
-                <ul>
-                    <strong>Title:</strong> {recipe.title}
-                </ul>
-                <ul>
-                    <strong>Description:</strong> {recipe.description}
-                </ul>
-                <ul>
-                    <strong>Portion Size:</strong> {recipe.portionSize}
-                </ul>
-                <ul>
-                    <strong>Ingredients:</strong> {recipe.ingredients}
-                </ul>
-                <ul>
-                    <strong>Instructions:</strong> {recipe.instructions}
-                </ul>
-                <ul>
-                    <strong>Other Collaborators:</strong> {recipe.collaborators}
-                </ul>
-            </li>
-        ))}
-    </ul>
+    <div>
+        <ul>
+            {recipes.map(recipe => (
+                <li key={recipe.rid}>
+                    <ul>
+                        <strong>Title:</strong> {recipe.title}
+                    </ul>
+                    <ul>
+                        <strong>Description:</strong> {recipe.description}
+                    </ul>
+                    <ul>
+                        <strong>Portion Size:</strong> {recipe.portionSize}
+                    </ul>
+                    <ul>
+                        <strong>Ingredients:</strong> {recipe.ingredients}
+                    </ul>
+                    <ul>
+                        <strong>Instructions:</strong> {recipe.instructions}
+                    </ul>
+                    <ul>
+                        <strong>Other Collaborators:</strong> {recipe.collaborators}
+                    </ul>
+                    <RecipeDelete rid={recipe.rid} />
+                    <RecipeUpdate recipe={recipe} />
+                </li>
+            ))}
+        </ul>
+    </div>
 );
 
 export default withFirebase(RecipeRead);
