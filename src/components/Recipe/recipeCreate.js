@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   share: false,
   userID: "",
   collaborators: [''],
+  dateCreated: '',
   showModal: false,
   showCollaborators: false
 }
@@ -78,7 +79,7 @@ class RecipeCreate extends React.Component{
                     </div>
                   : null
                 } 
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' onClick={() => this.setState({ dateCreated: Date.now() })}>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>
