@@ -80,6 +80,9 @@ const RecipeList = ({ recipes }) => (
                         <strong>Instructions:</strong> {recipe.instructions}
                     </ul>
                     <ul>
+                        <strong>Public:</strong> {'' + recipe.public}
+                    </ul>
+                    <ul>
                         <strong>Other Collaborators:</strong> {recipe.collaborators}
                     </ul>
                     <RecipeDelete rid={recipe.rid} />

@@ -12,6 +12,7 @@ const INITIAL_STATE = {
   portionSize: 1,
   ingredients: [''],
   instructions: [''],
+  public: false,
   share: false,
   collaborators: [],
   dateCreated: '',
@@ -69,6 +70,9 @@ class RecipeCreate extends React.Component{
                 <Form.Input name='portionSize' onChange={this.onChange} label='Portion Size' placeholder='Portion Size' />
                 <Form.TextArea label='Ingredients (separate ingredients by a new line)' placeholder='Ingredients' name='ingredients' onChange={this.onChange} />
                 <Form.TextArea label='Instructions (separate instructions by a new line)' placeholder='Instructions' name='instructions' onChange={this.onChange} />
+                <Form.Input name='public' onChange={this.onChange}>
+                  <Checkbox label='Public recipe' onClick={() => { this.setState((prevState) => ({ public: !prevState.public }))}} checked={this.state.public} />
+                </Form.Input>
                 <Form.Input name='share' onChange={this.onChange}>
                   <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
                 </Form.Input>

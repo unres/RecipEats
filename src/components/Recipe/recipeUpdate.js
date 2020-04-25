@@ -47,6 +47,9 @@ class RecipeUpdate extends React.Component{
                 <Form.Input name='portionSize' onChange={this.onChange} label='Portion Size' defaultValue={this.state.portionSize} />
                 <Form.TextArea label='Ingredients (separate ingredients by a new line)' defaultValue={this.state.ingredients} name='ingredients' onChange={this.onChange} />
                 <Form.TextArea label='Instructions (separate instructions by a new line)' defaultValue={this.state.instructions} name='instructions' onChange={this.onChange} />
+                <Form.Input name='public' onChange={this.onChange}>
+                  <Checkbox label='Public recipe' onClick={() => { this.setState((prevState) => ({ public: !prevState.public }))}} checked={this.state.public} />
+                </Form.Input>
                 <Form.Input name='share' onChange={this.onChange}>
                   <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
                 </Form.Input>
