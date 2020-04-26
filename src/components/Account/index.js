@@ -1,11 +1,51 @@
 import React from 'react';
-import PasswordChangeForm from '../PasswordChange';
+
 import "../Account/account.css"
-const AccountPage = () => (
+import { withFirebase } from '../Firebase';
+import DisplayInfo from './DisplayInfo.js';
+
+class AccountPage extends React.Component{
+
+  constructor(props) {
+    super(props);
+
+    this.state = { authUser: null, };
+  }
+
+  componentDidMount() {
+    this.listener = this.props.firebase.auth.onAuthStateChanged(
+      authUser => {
+        authUser
+          ? this.setState({ authUser})
+          : this.setState({ authUser: null });
+      },
+    );
+  }
+
+  componentWillUnmount() {
+    this.listener();
+  }
+
+
+render(){
+  console.log(this.state.authUser)
+  if(this.state.authUser === null){
+    return (
+      <div className='recipe'>
+        LOADING
+      </div>
+    )
+  }
+  else{
+    
+  return(
   <div className='account'>
-    <h1>Account Page</h1>
-    <h2>Change Password</h2>
-    <PasswordChangeForm />
+    <DisplayInfo authUser={this.state.authUser} />
   </div>
-);
-export default AccountPage;
+  )}
+}
+
+
+
+}
+export default withFirebase(AccountPage);
