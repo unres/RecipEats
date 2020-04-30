@@ -16,6 +16,7 @@ const INITIAL_STATE = {
   share: false,
   collaborators: [],
   dateCreated: '',
+  likes: 0,
   showModal: false,
   showCollaborators: false
 }
