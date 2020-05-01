@@ -12,6 +12,14 @@ const RecipeCard = props => (
                         {props.recipe.description}
                     </Card.Content>
                     <Card.Content extra>
-                        <div>  </Card>
+                        <div>  
+                          <Icon name="heart" disabled />
+                            {props.recipe.likes}
+                        </div>
+                    </Card.Content>
+                </Card>
+                }>
+                <Modal.Header>{props.recipe.title}</Modal.Header> 
+                </Card>
 );
 export default RecipeCard;
