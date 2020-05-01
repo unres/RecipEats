@@ -4,6 +4,9 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import '../Cookbook/cookbook.css'
 
+var CID = "01";
+const min = 1000;
+
 // Initial state for new cookbooks
 const INITIAL_STATE = {
   title: '',
@@ -17,17 +20,16 @@ const INITIAL_STATE = {
 class CookbookCreate extends React.Component{
   constructor(props) {
     super(props);
-    console.log(props)
     // Assigns initial state to state variable for form to change and submit
     // Affected by setState method
-    this.state = { ...INITIAL_STATE };
+    this.state = { ...INITIAL_STATE, userID: this.props.uid };
     this.writeToDB = this.writeToDB.bind(this);
   }
 
   writeToDB() {
     // TODO: Figure out a way to generate cookbook ids (cid) for submission to database
     // Using this.title just makes the cid undefined in the database
-    return this.props.firebase.cookbook(this.title)
+    return this.props.firebase.cookbook(CID)
       .set({
         ...this.state
       })
@@ -57,7 +59,8 @@ class CookbookCreate extends React.Component{
   }
 
   onSubmit = event => {
-    this.setState({ userID: this.props.firebase.getUID()}, this.writeToDB)
+    generateCID();
+    this.writeToDB();
   }
 
   render() {
@@ -77,6 +80,10 @@ class CookbookCreate extends React.Component{
       </div>
     );
   }
+}
+
+const generateCID = () => {
+  CID = Date.now() + String( Math.floor(Math.random() * min));
 }
 
 export default withFirebase(CookbookCreate);

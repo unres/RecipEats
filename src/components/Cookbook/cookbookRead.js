@@ -8,7 +8,8 @@ class CookbookRead extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            cookbooks: []
+            cookbooks: [],
+            userID: this.props.uid,
         };
     }
 
@@ -22,8 +23,16 @@ class CookbookRead extends Component {
                 uid: key
             }));
 
+            const userCookbooks = [];
+
+            cookbooksList.map(cookbook => {
+                if (cookbook.userID === this.state.userID) {
+                    userCookbooks.push(cookbook)
+                }
+            });
+
             this.setState({
-                cookbooks: cookbooksList
+                cookbooks: userCookbooks
             });
         });
     }
@@ -34,6 +43,7 @@ class CookbookRead extends Component {
     
     render() {
         const {cookbooks} = this.state;
+        
         return(
             <div>
                 <CookbookList cookbooks = {cookbooks} />
