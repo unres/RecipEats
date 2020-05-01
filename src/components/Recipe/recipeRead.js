@@ -70,9 +70,9 @@ const RecipeList = ({ recipes }) => (
                     <Card.Content>
                         <Card.Header>{recipe.title}</Card.Header>
                     </Card.Content>
-                    <Card.Description>
+                    <Card.Content>
                         {recipe.description}
-                    </Card.Description>
+                    </Card.Content>
                     <Card.Content extra>
                         <div>
                             <Icon name="heart" disabled />
@@ -85,25 +85,25 @@ const RecipeList = ({ recipes }) => (
                     
                 <Modal.Content>
 
-<Header as="h4">Portion Size:  {recipe.portionSize}</Header>
+                        <Header as="h4">Portion Size:  {recipe.portionSize}</Header>
+                        
+                        <Header>Ingredients:</Header>
+                        {recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
 
-<Header>Ingredients:</Header>
-{recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+                        <Header>Instructions:</Header>
+                        {recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
 
-<Header>Instructions:</Header>
-{recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
-
-</Modal.Content>
-<Modal.Actions>
-<Button.Group>
-<RecipeUpdate recipe={recipe}/>
-<RecipeDelete rid={recipe.rid} />
-</Button.Group>
-</Modal.Actions>
-</Modal>
-))}
-</Card.Group>
-</div>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button.Group>
+                        <RecipeUpdate recipe={recipe}/>
+                        <RecipeDelete rid={recipe.rid} />
+                    </Button.Group>
+                </Modal.Actions>
+                </Modal>
+            ))}
+        </Card.Group>
+    </div>
 );
 
 export default withFirebase(RecipeRead);
