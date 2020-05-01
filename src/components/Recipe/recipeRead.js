@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import RecipeDelete from './recipeDelete.js';
 import RecipeUpdate from './recipeUpdate.js';
+import { Card, Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 class RecipeRead extends Component {
     constructor(props) {
@@ -11,7 +12,8 @@ class RecipeRead extends Component {
             loading: false,
             recipes: [],
             userID: this.props.uid,
-            email: this.props.email
+            email: this.props.email,
+            open: false,
         };
     }
 
@@ -58,6 +60,7 @@ class RecipeRead extends Component {
         );
     }
 }
+
 
 const RecipeList = ({ recipes }) => (
     <div>
