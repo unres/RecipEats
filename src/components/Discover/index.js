@@ -22,7 +22,7 @@ class Discover extends React.Component{
 
       const recipesList = Object.keys(recipesObject).map(key => ({
           ...recipesObject[key],
-          uid: key,
+          rid: key,
       }));
 
       this.setState({
