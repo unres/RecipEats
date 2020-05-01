@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Form, Header} from 'semantic-ui-react';
+import {Button, Modal, Form, Header, Icon} from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -72,7 +72,7 @@ render(){
     </Modal>
 
   <h1>Grocery List</h1>
-{ingredientList.map(ingredient => (<Header>{ingredient}</Header>))}
+{ingredientList.map(ingredient => (<div><Header>{ingredient}</Header><Icon name="heart" disabled /></div>))}
 </div>)
 }
 
