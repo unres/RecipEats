@@ -79,7 +79,6 @@ componentWillUnmount() {
   }
 }
 
-
 const RecipeList = ({ recipes }) => (
   <Card.Group>
    {recipes.map(recipe=>(
