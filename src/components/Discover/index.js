@@ -56,14 +56,19 @@ componentWillUnmount() {
   this.props.firebase.recipes().off();
 }
   render() {
-    const { recipes, loading } = this.state;
+    const {  loading, newRecipes, mostLikedRecipes } = this.state;
     return (
       <div className='discover'>
         
         <Header as='h1'>Discover Page</Header>
         <Header as='h2'>New Recipes</Header>
         {loading && <div>Loading...</div>}
-        <RecipeList recipes = {recipes}></RecipeList>
+        <RecipeList recipes = {newRecipes}></RecipeList>
+
+        <Header as='h2'>Most Liked Recipes</Header>
+        {loading && <div>Loading...</div>}
+        <RecipeList recipes = {mostLikedRecipes}></RecipeList>
+
         <Header as='h2'>New Cookbooks</Header>
         <Card >
           <Card.Content header='Bell Family Desserts'/>
