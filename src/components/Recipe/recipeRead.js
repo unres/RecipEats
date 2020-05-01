@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import RecipeDelete from './recipeDelete.js';
 import RecipeUpdate from './recipeUpdate.js';
+import { Card, Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 class RecipeRead extends Component {
     constructor(props) {
@@ -9,7 +10,10 @@ class RecipeRead extends Component {
 
         this.state = {
             loading: false,
-            recipes: []
+            recipes: [],
+            userID: this.props.uid,
+            email: this.props.email,
+            open: false,
         };
     }
 
@@ -21,11 +25,18 @@ class RecipeRead extends Component {
 
             const recipesList = Object.keys(recipesObject).map(key => ({
                 ...recipesObject[key],
-                uid: key,
+                rid: key,
             }));
 
+            const userRecipes = [];
+
+            recipesList.map(recipe => {
+                if (recipe.userID === this.state.userID || (recipe.collaborators != null && recipe.collaborators.indexOf(this.state.email) > -1))
+                    userRecipes.push(recipe)
+            });
+
             this.setState({
-                recipes: recipesList,
+                recipes: userRecipes,
                 loading: false            
             });
         });
@@ -45,38 +56,54 @@ class RecipeRead extends Component {
                 {loading && <div>Loading...</div>}
 
                 <RecipeList recipes={recipes} />
-                <RecipeDelete />
-                <RecipeUpdate />
             </div>
         );
     }
 }
 
 const RecipeList = ({ recipes }) => (
-    <ul>
-        {recipes.map(recipe => (
-            <li key={recipe.uid}>
-                <ul>
-                    <strong>Title:</strong> {recipe.title}
-                </ul>
-                <ul>
-                    <strong>Description:</strong> {recipe.description}
-                </ul>
-                <ul>
-                    <strong>Portion Size:</strong> {recipe.portionSize}
-                </ul>
-                <ul>
-                    <strong>Ingredients:</strong> {recipe.ingredients}
-                </ul>
-                <ul>
-                    <strong>Instructions:</strong> {recipe.instructions}
-                </ul>
-                <ul>
-                    <strong>Other Collaborators:</strong> {recipe.collaborators}
-                </ul>
-            </li>
-        ))}
-    </ul>
+    <div>
+        <Card.Group >
+            {recipes.map(recipe => (
+                <Modal closeIcon key={recipe.rid} trigger={
+                <Card >
+                    <Card.Content>
+                        <Card.Header>{recipe.title}</Card.Header>
+                    </Card.Content>
+                    <Card.Content>
+                        {recipe.description}
+                    </Card.Content>
+                    <Card.Content extra>
+                        <div>
+                            <Icon name="heart" disabled />
+                            {recipe.likes}
+                        </div>
+                    </Card.Content>
+                </Card>
+                }>
+                <Modal.Header>{recipe.title}</Modal.Header>
+                    
+                <Modal.Content>
+
+                        <Header as="h4">Portion Size:  {recipe.portionSize}</Header>
+                        
+                        <Header>Ingredients:</Header>
+                        {recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+                        <Header>Instructions:</Header>
+                        {recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button.Group>
+                        <RecipeUpdate recipe={recipe}/>
+                        <RecipeDelete rid={recipe.rid} />
+                    </Button.Group>
+                </Modal.Actions>
+                </Modal>
+            ))}
+        </Card.Group>
+    </div>
 );
 
 export default withFirebase(RecipeRead);

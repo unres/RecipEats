@@ -10,7 +10,8 @@ class Discover extends React.Component{
 
     this.state = {
       loading: false,
-      recipes: []
+      newRecipes: [],
+      mostLikedRecipes: [],
   };
 }
   componentDidMount() {
@@ -21,11 +22,31 @@ class Discover extends React.Component{
 
       const recipesList = Object.keys(recipesObject).map(key => ({
           ...recipesObject[key],
-          uid: key,
+          rid: key,
       }));
 
+      const publicRecies = [];
+
+      recipesList.map(recipe => {
+        if ( recipe.share === true)
+        publicRecies.push(recipe)
+      });
+
+      const showNewRecipes = publicRecies.sort(function(item1, item2) {
+        return (item1.dateCreated < item2.dateCreated)
+      })
+
+      const showMostLikedRecipes = publicRecies.sort(function(item1, item2) {
+        return (item1.likes < item2.likes)
+      });
+      //const showNewCookbooks = [];
+      //const showMostLikedCookbooks = [];
+
+      
+
       this.setState({
-          recipes: recipesList,
+          newRecipes: showNewRecipes,
+          mostLikedRecipes: showMostLikedRecipes,
           loading: false            
       });
    });
@@ -35,14 +56,19 @@ componentWillUnmount() {
   this.props.firebase.recipes().off();
 }
   render() {
-    const { recipes, loading } = this.state;
+    const {  loading, newRecipes, mostLikedRecipes } = this.state;
     return (
       <div className='discover'>
         
         <Header as='h1'>Discover Page</Header>
         <Header as='h2'>New Recipes</Header>
         {loading && <div>Loading...</div>}
-        <RecipeList recipes = {recipes}></RecipeList>
+        <RecipeList recipes = {newRecipes}></RecipeList>
+
+        <Header as='h2'>Most Liked Recipes</Header>
+        {loading && <div>Loading...</div>}
+        <RecipeList recipes = {mostLikedRecipes}></RecipeList>
+
         <Header as='h2'>New Cookbooks</Header>
         <Card >
           <Card.Content header='Bell Family Desserts'/>
@@ -56,7 +82,7 @@ componentWillUnmount() {
 const RecipeList = ({ recipes }) => (
   <Card.Group>
    {recipes.map(recipe=>(
-          <RecipeCard Title={recipe.title} description={recipe.description} ></RecipeCard>
+          <RecipeCard recipe={recipe} ></RecipeCard>
         ))}
   </Card.Group>
 
