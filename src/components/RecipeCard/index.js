@@ -26,8 +26,15 @@ const RecipeCard = props => (
                         Header>Ingredients:</Header>
                         {props.recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
 
+                 
                         <Header>Instructions:</Header>
-                        
-                </Card>
+                        {props.recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+                </Modal.Content>
+
+                </Modal>
+  </Card>
+);
+export default RecipeCard;
 );
 export default RecipeCard;
