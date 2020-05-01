@@ -31,7 +31,27 @@ class Discover extends React.Component{
         if ( recipe.share == true)
         publicRecies.push(recipe)
       });
+
+      const showNewRecipes = publicRecies.sort(function(item1, item2) {
+        return (item1.dateCreated < item2.dateCreated)
+      })
+
+      const showMostLikedRecipes = publicRecies.sort(function(item1, item2) {
+        return (item1.likes < item2.likes)
+      });
+      const showNewCookbooks = [];
+      const showMostLikedCookbooks = [];
+
       
+
+      this.setState({
+          newRecipes: showNewRecipes,
+          mostLikedRecipes: showMostLikedRecipes,
+          loading: false            
+      });
+   });
+  }
+
 componentWillUnmount() {
   this.props.firebase.recipes().off();
 }
