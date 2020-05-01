@@ -20,6 +20,9 @@ const RecipeCard = props => (
                 </Card>
                 }>
                 <Modal.Header>{props.recipe.title}</Modal.Header> 
+                <Modal.Content>
+
+                        <Header as="h4">Portion Size:  {props.recipe.portionSize}</Header>
                 </Card>
 );
 export default RecipeCard;
