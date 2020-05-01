@@ -10,7 +10,8 @@ class Discover extends React.Component{
 
     this.state = {
       loading: false,
-      recipes: []
+      newRecipes: [],
+      mostLikedRecipes: [],
   };
 }
   componentDidMount() {
