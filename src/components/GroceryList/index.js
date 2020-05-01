@@ -1,45 +1,51 @@
 import React from 'react';
-import {Button, Modal, Form} from 'semantic-ui-react';
 
-
-import '../GroceryList/grocery.css'
+import "../GroceryList/grocery.css"
+import { withFirebase } from '../Firebase';
+import GroceryListFile from './GroceryListFile.js';
 
 class GroceryList extends React.Component{
 
   constructor(props) {
     super(props);
 
-    this.state = { ingredientList: [], addIngredient: "", showModal : false };
+    this.state = { authUser: null, };
   }
 
-  onChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
+  componentDidMount() {
+    this.listener = this.props.firebase.auth.onAuthStateChanged(
+      authUser => {
+        authUser
+          ? this.setState({ authUser})
+          : this.setState({ authUser: null });
+      },
+    );
+  }
 
-  onSubmit = event => {
-    this.setState({ showModal: false })
-      var temp = this.state.ingredientList.concat(this.state.addIngredient) 
-      this.setState({ ingredientList : temp})
-  };
+  componentWillUnmount() {
+    this.listener();
+  }
 
 
 render(){
-  const { showModal} = this.state;
-  console.log(this.state.ingredientList)
-  return(  <div className='grocery'>
-    <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Add Item</Button>} closeIcon open={showModal}>
-      <Modal.Content>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Input name="addIngredient" onChange={this.onChange} label="Ingredient" placeholder="Ingredient" /> 
-          <Button type='submit' onClick={this.onSubmit}>Submit</Button>
-        </Form>
-      </Modal.Content> 
-    </Modal>
-  <h1>Grocery List</h1>
-</div>)
+  console.log(this.state.authUser)
+  if(this.state.authUser === null){
+    return (
+      <div className='recipe'>
+        LOADING
+      </div>
+    )
+  }
+  else{
+    
+  return(
+  <div className='grocery'>
+    <GroceryListFile authUser={this.state.authUser} />
+  </div>
+  )}
 }
 
 
-}
 
-export default GroceryList;
+}
+export default withFirebase(GroceryList);
