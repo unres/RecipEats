@@ -25,13 +25,13 @@ class Discover extends React.Component{
           rid: key,
       }));
 
-      this.setState({
-          recipes: recipesList,
-          loading: false            
-      });
-   });
-  }
+      const publicRecies = [];
 
+      recipesList.map(recipe => {
+        if ( recipe.share == true)
+        publicRecies.push(recipe)
+      });
+      
 componentWillUnmount() {
   this.props.firebase.recipes().off();
 }
