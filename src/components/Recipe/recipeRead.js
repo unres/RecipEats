@@ -83,3 +83,27 @@ const RecipeList = ({ recipes }) => (
                 }>
                 <Modal.Header>{recipe.title}</Modal.Header>
                     
+                <Modal.Content>
+
+<Header as="h4">Portion Size:  {recipe.portionSize}</Header>
+
+<Header>Ingredients:</Header>
+{recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+<Header>Instructions:</Header>
+{recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+</Modal.Content>
+<Modal.Actions>
+<Button.Group>
+<RecipeUpdate recipe={recipe}/>
+<RecipeDelete rid={recipe.rid} />
+</Button.Group>
+</Modal.Actions>
+</Modal>
+))}
+</Card.Group>
+</div>
+);
+
+export default withFirebase(RecipeRead);
