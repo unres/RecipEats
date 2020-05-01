@@ -79,10 +79,11 @@ componentWillUnmount() {
   }
 }
 
+
 const RecipeList = ({ recipes }) => (
   <Card.Group>
    {recipes.map(recipe=>(
-          <RecipeCard Title={recipe.title} description={recipe.description} ></RecipeCard>
+          <RecipeCard recipe={recipe} ></RecipeCard>
         ))}
   </Card.Group>
 
