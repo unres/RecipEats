@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from 'semantic-ui-react';
+import { Card, Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 const RecipeCard = props => (
   <Card>
