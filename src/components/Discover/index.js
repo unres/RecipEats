@@ -28,7 +28,7 @@ class Discover extends React.Component{
       const publicRecies = [];
 
       recipesList.map(recipe => {
-        if ( recipe.share == true)
+        if ( recipe.share === true)
         publicRecies.push(recipe)
       });
 
@@ -39,8 +39,8 @@ class Discover extends React.Component{
       const showMostLikedRecipes = publicRecies.sort(function(item1, item2) {
         return (item1.likes < item2.likes)
       });
-      const showNewCookbooks = [];
-      const showMostLikedCookbooks = [];
+      //const showNewCookbooks = [];
+      //const showMostLikedCookbooks = [];
 
       
 
