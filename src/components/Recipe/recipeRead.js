@@ -61,39 +61,25 @@ class RecipeRead extends Component {
     }
 }
 
-
 const RecipeList = ({ recipes }) => (
     <div>
-        <ul>
+        <Card.Group >
             {recipes.map(recipe => (
-                <li key={recipe.rid}>
-                    <ul>
-                        <strong>Title:</strong> {recipe.title}
-                    </ul>
-                    <ul>
-                        <strong>Description:</strong> {recipe.description}
-                    </ul>
-                    <ul>
-                        <strong>Portion Size:</strong> {recipe.portionSize}
-                    </ul>
-                    <ul>
-                        <strong>Ingredients:</strong> {recipe.ingredients}
-                    </ul>
-                    <ul>
-                        <strong>Instructions:</strong> {recipe.instructions}
-                    </ul>
-                    <ul>
-                        <strong>Public:</strong> {'' + recipe.public}
-                    </ul>
-                    <ul>
-                        <strong>Other Collaborators:</strong> {recipe.collaborators}
-                    </ul>
-                    <RecipeDelete rid={recipe.rid} />
-                    <RecipeUpdate recipe={recipe} />
-                </li>
-            ))}
-        </ul>
-    </div>
-);
-
-export default withFirebase(RecipeRead);
+                <Modal closeIcon key={recipe.rid} trigger={
+                <Card >
+                    <Card.Content>
+                        <Card.Header>{recipe.title}</Card.Header>
+                    </Card.Content>
+                    <Card.Description>
+                        {recipe.description}
+                    </Card.Description>
+                    <Card.Content extra>
+                        <div>
+                            <Icon name="heart" disabled />
+                            {recipe.likes}
+                        </div>
+                    </Card.Content>
+                </Card>
+                }>
+                <Modal.Header>{recipe.title}</Modal.Header>
+                    
