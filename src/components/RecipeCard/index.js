@@ -23,6 +23,11 @@ const RecipeCard = props => (
                 <Modal.Content>
 
                         <Header as="h4">Portion Size:  {props.recipe.portionSize}</Header>
+                        Header>Ingredients:</Header>
+                        {props.recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+
+                        <Header>Instructions:</Header>
+                        
                 </Card>
 );
 export default RecipeCard;
