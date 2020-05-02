@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Form, Card, Icon, List} from 'semantic-ui-react';
+import {Button, Modal, Form, Card, Icon, List, Checkbox} from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -100,9 +100,11 @@ const RecipeList = ({ recipes }) => (
                 </Card>
                 }>
         <Modal.Content>
-          {recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} />)}
         </Modal.Content>
-
+        <Modal.Content extra>
+          <Button>Add</Button>
+        </Modal.Content>
         </Modal>
       ))}
   </div>
