@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Form, Header, Icon} from 'semantic-ui-react';
+import {Button, Modal, Form, Header, Icon, List} from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -10,6 +10,7 @@ class GroceryListFile extends React.Component{
 
     this.state = { ingredientList: [], addIngredient: "", showModal : false, loading : false, recipes : [], showModal2 : false,  userID: this.props.authUser.uid,
     email: this.props.authUser.email };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   onChange = event => {
@@ -51,6 +52,11 @@ componentWillUnmount() {
     this.props.firebase.recipes().off();
 }
 
+handleClick (event){
+var temp = []
+this.state.ingredientList.map(ingredient=>{if(ingredient!==event.target.id){temp.push(ingredient)}})
+this.setState({ingredientList : temp})
+}
 
 
 render(){
@@ -72,7 +78,7 @@ render(){
     </Modal>
 
   <h1>Grocery List</h1>
-{ingredientList.map(ingredient => (<div><Header>{ingredient}</Header><Icon name="heart" disabled /></div>))}
+<List divided verticalAlign='middle'>{ingredientList.map(ingredient => (<List.Item>{ingredient}<List.Content floated='right'><Icon  id={ingredient} size='big' name="close" link onClick={this.handleClick}/></List.Content></List.Item>))}</List>
 </div>)
 }
 
