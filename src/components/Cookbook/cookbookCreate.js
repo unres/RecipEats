@@ -13,8 +13,7 @@ const INITIAL_STATE = {
   description: '',
   // Default public access to false
   public: false,
-  recipes: [],
-  userID: ''
+  recipes: []
 }
 
 class CookbookCreate extends React.Component{
@@ -27,8 +26,7 @@ class CookbookCreate extends React.Component{
   }
 
   writeToDB() {
-    // TODO: Figure out a way to generate cookbook ids (cid) for submission to database
-    // Using this.title just makes the cid undefined in the database
+    console.log(this.state);
     return this.props.firebase.cookbook(CID)
       .set({
         ...this.state
@@ -66,7 +64,7 @@ class CookbookCreate extends React.Component{
   render() {
     return(
       <div className='cookbook'>
-        <Modal trigger={<Button size='massive'>Add New Cookbook</Button>}>
+        <Modal closeIcon trigger={<Button size='massive'>Add New Cookbook</Button>}>
           <ModalHeader>Create a Cookbook</ModalHeader>
           <ModalDescription>
             <Form onSubmit={this.onSubmit}>

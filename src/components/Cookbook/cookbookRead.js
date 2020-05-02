@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-import { Button, List } from 'semantic-ui-react';
+import { Card, Modal, Button, Header } from 'semantic-ui-react';
+import CookbookDelete from './cookbookDelete.js';
+import CookbookUpdate from './cookbookUpdate.js';
 import '../Cookbook/cookbook.css'
 
 
@@ -20,7 +22,7 @@ class CookbookRead extends Component {
 
             const cookbooksList = Object.keys(cookbooksObj).map(key => ({
                 ...cookbooksObj[key],
-                uid: key
+                cid: key
             }));
 
             const userCookbooks = [];
@@ -54,19 +56,36 @@ class CookbookRead extends Component {
 
 // Pass an object with cookbooks
 // Renders buttons for each cookbook
-// TODO: Clicking cookbook buttons should open up the cookbook details
 const CookbookList = ({ cookbooks }) => (
-    <List>
-        {cookbooks.map(cookbook => (
-            //<List.Item key={cookbook.uid}><List><Button>{cookbook.title}</Button></List></List.Item>
-            <List.Item key={cookbook.uid}>
-                <List>Title: {cookbook.title}</List>
-                <List>Description: {cookbook.description}</List>
-                <List>Public: {cookbook.public.toString()}</List>
-                <List>Recipes: {cookbook.recipes}</List>
-            </List.Item>
-        ))}
-    </List>
+    <div>
+        <Card.Group >
+            {cookbooks.map(cookbook => (
+                <Modal closeIcon key={cookbook.cid} trigger={
+                <Card >
+                    <Card.Content>
+                        <Card.Header>{cookbook.title}</Card.Header>
+                    </Card.Content>
+                    <Card.Content>
+                        {cookbook.description}
+                    </Card.Content>
+                </Card>
+                }>
+                    
+                <Modal.Header>{cookbook.title}</Modal.Header>
+
+                <Modal.Content>
+                    <Header>Recipes: {cookbook.recipes}</Header>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button.Group>
+                        <CookbookUpdate cookbook={cookbook}/>
+                        <CookbookDelete cid={cookbook.cid} />
+                    </Button.Group>
+                </Modal.Actions>
+                </Modal>
+            ))}
+        </Card.Group>
+    </div>
 )
 
 export default withFirebase(CookbookRead)
