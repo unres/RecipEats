@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Form, Header, Icon, List} from 'semantic-ui-react';
+import {Button, Modal, Form, Card, Icon, List} from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -88,7 +88,23 @@ render(){
 
 const RecipeList = ({ recipes }) => (
   <div>
-{recipes.map(recipe => (<Header key={recipe.rid}>{recipe.title}</Header>))}
+{recipes.map(recipe => (
+       <Modal closeIcon key={recipe.rid} trigger={
+                <Card >
+                    <Card.Content>
+                        <Card.Header>{recipe.title}</Card.Header>
+                    </Card.Content>
+                    <Card.Content>
+                        {recipe.description}
+                    </Card.Content>
+                </Card>
+                }>
+        <Modal.Content>
+          {recipe.ingredients.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
+        </Modal.Content>
+
+        </Modal>
+      ))}
   </div>
 );
 
