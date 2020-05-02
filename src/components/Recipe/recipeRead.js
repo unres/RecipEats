@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
 import RecipeDelete from './recipeDelete.js';
 import RecipeUpdate from './recipeUpdate.js';
+import Likes from '../RecipeCard/likes.js';
 import { Card, Icon, Modal, Button, Header } from 'semantic-ui-react';
 
 class RecipeRead extends Component {
@@ -98,6 +99,7 @@ const RecipeList = ({ recipes }) => (
                     <Button.Group>
                         <RecipeUpdate recipe={recipe}/>
                         <RecipeDelete rid={recipe.rid} />
+                        <Likes recipe={recipe}/>
                     </Button.Group>
                 </Modal.Actions>
                 </Modal>
