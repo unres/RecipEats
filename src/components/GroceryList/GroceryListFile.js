@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Modal, Form, Card, Icon, List, Checkbox} from 'semantic-ui-react';
+import { Button, Modal, Form, Card, Icon, List, Checkbox } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -9,8 +9,9 @@ class GroceryListFile extends React.Component{
     super(props);
 
     this.state = { ingredientList: [], addIngredient: "", showModal : false, loading : false, recipes : [], showModal2 : false,  userID: this.props.authUser.uid,
-    email: this.props.authUser.email };
+    email: this.props.authUser.email, tempArray: []};
     this.handleClick = this.handleClick.bind(this);
+    this.testAdd = this.testAdd.bind(this);
   }
 
   onChange = event => {
@@ -58,6 +59,25 @@ this.state.ingredientList.map(ingredient=>{if(ingredient!==event.target.id){temp
 this.setState({ingredientList : temp})
 }
 
+testAdd(event){
+      var tempList = this.state.ingredientList;
+      tempList.push(event.target.id);
+      this.setState({ingredientList: tempList, checked: !this.state.checked})
+  }
+
+  handleSubmit = () =>{
+    console.log("here");
+    var tempList = this.state.ingredientList;
+    this.state.tempArray.map(ingredient =>{
+      if(tempList.indexOf(ingredient) > -1){
+
+      }
+      else{
+        tempList.push(ingredient)
+      }
+    })
+    this.setState({ingredientList: tempList })
+  }
 
 render(){
   const { showModal,ingredientList,recipes, showModal2} = this.state;
@@ -73,7 +93,7 @@ render(){
 
     <Modal trigger={<Button onClick={() => this.setState({ showModal2: true })}>Add From Recipe</Button>} closeIcon open={showModal2}>
       <Modal.Content>
-        <RecipeList recipes={recipes}></RecipeList> 
+        <RecipeList recipes={recipes} testAdd={this.testAdd} handleSubmit={this.handleSubmit}></RecipeList> 
       </Modal.Content> 
     </Modal>
 
@@ -86,7 +106,7 @@ render(){
 }
 
 
-const RecipeList = ({ recipes }) => (
+const RecipeList = ({ recipes, testAdd, handleSubmit }) => (
   <div>
 {recipes.map(recipe => (
        <Modal closeIcon key={recipe.rid} trigger={
@@ -100,10 +120,12 @@ const RecipeList = ({ recipes }) => (
                 </Card>
                 }>
         <Modal.Content>
-          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} />)}
+          <Form onSubmit={handleSubmit}>
+          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} onChange={testAdd} id={item} />)}
+          </Form>
         </Modal.Content>
         <Modal.Content extra>
-          <Button>Add</Button>
+          <Button type='submit'>Add</Button>
         </Modal.Content>
         </Modal>
       ))}
