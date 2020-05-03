@@ -4,6 +4,7 @@ import RecipeDelete from './recipeDelete.js';
 import RecipeUpdate from './recipeUpdate.js';
 import Likes from '../RecipeCard/likes.js';
 import { Card, Icon, Modal, Button, Header } from 'semantic-ui-react';
+import './buttonCSS.css';
 
 class RecipeRead extends Component {
     constructor(props) {
