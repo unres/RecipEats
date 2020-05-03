@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ModalHeader, Modal, ModalDescription, Form } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -44,15 +44,15 @@ class CookbookUpdate extends React.Component{
       return(
         <div>
           <Modal closeIcon trigger={<Button>Update Cookbook</Button>}>
-            <ModalHeader>Edit Cookbook</ModalHeader>
-            <ModalDescription>
+            <Modal.Header>Edit Cookbook</Modal.Header>
+            <Modal.Content>
               <Form onSubmit={this.onSubmit}>
                 <Form.Input name='title' label='Title' placeholder='Title' onChange={this.onChange} defaultValue={this.state.title}></Form.Input>
                 <Form.Input name='description' label='Description' placeholder='Description' onChange={this.onChange} defaultValue={this.state.description}></Form.Input>
                 <Form.Radio name='public' label='Allow Public Access' onChange={this.toggleOnChange} toggle/>
-                <Button type='submit'>Submit</Button>
+                <Button type='submit' color='green'>Submit</Button>
               </Form>
-            </ModalDescription>
+            </Modal.Content>
           </Modal>
         </div>
       );
