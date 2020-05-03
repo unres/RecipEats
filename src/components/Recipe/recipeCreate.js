@@ -10,12 +10,13 @@ const INITIAL_STATE = {
   title: '',
   description: '',
   portionSize: 1,
-  ingredients: [''],
-  instructions: [''],
+  ingredients: [],
+  instructions: [],
   public: false,
   share: false,
   collaborators: [],
   dateCreated: '',
+  likes: 0,
   showModal: false,
   showCollaborators: false
 }
@@ -56,7 +57,23 @@ class RecipeCreate extends React.Component{
   }
 
   render() {
-    const { showModal, showCollaborators } = this.state;
+    const { 
+      title,
+      description,
+      portionSize,
+      ingredients,
+      instructions,
+      showModal, 
+      showCollaborators 
+    } = this.state;
+
+    const isInvalid =
+      title === '' ||
+      description === '' ||
+      portionSize === 1 ||
+      ingredients.length === 0 ||
+      instructions.length === 0;
+
     return (
       <div>
         <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
@@ -82,7 +99,7 @@ class RecipeCreate extends React.Component{
                     </div>
                   : null
                 } 
-                <Button type='submit' onClick={() => this.setState({ dateCreated: Date.now() })}>Submit</Button>
+                <Button disabled={isInvalid} type='submit' onClick={() => this.setState({ dateCreated: Date.now() })}>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>

@@ -33,7 +33,23 @@ class RecipeUpdate extends React.Component{
   }
 
   render() {
-    const { showModal, showCollaborators } = this.state;
+    const { 
+      title,
+      description,
+      portionSize,
+      ingredients,
+      instructions,
+      showModal, 
+      showCollaborators 
+    } = this.state;
+
+    const isInvalid =
+      title === '' ||
+      description === '' ||
+      portionSize === 1 ||
+      ingredients.length === 0 ||
+      instructions.length === 0;
+
     return (
       <div>
         <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Update Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
@@ -59,7 +75,7 @@ class RecipeUpdate extends React.Component{
                     </div>
                   : null
                 } 
-                <Button type='submit'>Submit</Button>
+                <Button disabled={isInvalid} type='submit'>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>
