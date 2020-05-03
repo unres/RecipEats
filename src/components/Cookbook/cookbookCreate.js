@@ -26,7 +26,6 @@ class CookbookCreate extends React.Component{
   }
 
   writeToDB() {
-    console.log(this.state);
     return this.props.firebase.cookbook(CID)
       .set({
         ...this.state

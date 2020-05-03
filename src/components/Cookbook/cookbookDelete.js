@@ -12,7 +12,6 @@ class CookbookDelete extends Component {
     }
 
     removeCookbook() {
-        console.log(this.state);
         this.props.firebase.cookbook(this.state.cid).remove();
     }
 

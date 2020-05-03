@@ -42,7 +42,7 @@ class CookbookUpdate extends React.Component{
   
     render() {
       return(
-        <div className='cookbook'>
+        <div>
           <Modal closeIcon trigger={<Button>Update Cookbook</Button>}>
             <ModalHeader>Edit Cookbook</ModalHeader>
             <ModalDescription>

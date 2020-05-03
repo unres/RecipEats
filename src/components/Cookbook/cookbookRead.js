@@ -4,11 +4,12 @@ import { Card, Modal, Button, Header } from 'semantic-ui-react';
 import CookbookDelete from './cookbookDelete.js';
 import CookbookUpdate from './cookbookUpdate.js';
 import '../Cookbook/cookbook.css'
+import CookbookAddNewRecipe from './cookbookAddNewRecipe';
 
 
 class CookbookRead extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             cookbooks: [],
             userID: this.props.uid,
@@ -17,6 +18,26 @@ class CookbookRead extends Component {
 
     // componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
     componentDidMount() {
+        this.props.firebase.recipes().on('value', snapshot => {
+            const recipesObject = snapshot.val();
+
+            const recipesList = Object.keys(recipesObject).map(key => ({
+                ...recipesObject[key],
+                rid: key,
+            }));
+
+            const userRecipes = [];
+
+            recipesList.map(recipe => {
+                if (recipe.userID === this.state.userID || (recipe.collaborators != null && recipe.collaborators.indexOf(this.state.email) > -1))
+                    userRecipes.push(recipe)
+            });
+
+            this.setState({
+                recipes: userRecipes,    
+            });
+        });
+
         this.props.firebase.cookbooks().on('value', snapshot => {
             const cookbooksObj = snapshot.val();
 
@@ -33,8 +54,9 @@ class CookbookRead extends Component {
                 }
             });
 
+
             this.setState({
-                cookbooks: userCookbooks
+                cookbooks: userCookbooks,
             });
         });
     }
@@ -44,6 +66,7 @@ class CookbookRead extends Component {
     }
     
     render() {
+        // this.state.recipes is an array but also an object????
         const {cookbooks} = this.state;
         
         return(
@@ -74,12 +97,14 @@ const CookbookList = ({ cookbooks }) => (
                 <Modal.Header>{cookbook.title}</Modal.Header>
 
                 <Modal.Content>
-                    <Header>Recipes: {cookbook.recipes}</Header>
+                    {/*Create card for each recipe in cookbook*/}
+                    <Header>{cookbook.recipes}</Header>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button.Group>
                         <CookbookUpdate cookbook={cookbook}/>
                         <CookbookDelete cid={cookbook.cid} />
+                        <CookbookAddNewRecipe obj={cookbook} />
                     </Button.Group>
                 </Modal.Actions>
                 </Modal>
