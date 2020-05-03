@@ -18,6 +18,7 @@ const Navigation = () => (
 
 const NavigationAuth = () => (
   <Menu borderless size='massive'>
+    <Menu.Item header>RecipEats</Menu.Item>
     <SignOutButton />
   </Menu>
 );
