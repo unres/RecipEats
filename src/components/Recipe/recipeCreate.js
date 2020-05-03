@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Image, Checkbox, Form } from 'semantic-ui-react';
+import { Button, Modal, Image, Checkbox, Form, Icon } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -10,8 +10,8 @@ const INITIAL_STATE = {
   title: '',
   description: '',
   portionSize: 1,
-  ingredients: [],
-  instructions: [],
+  ingredients: [''],
+  instructions: [''],
   public: false,
   share: false,
   collaborators: [],
@@ -57,26 +57,10 @@ class RecipeCreate extends React.Component{
   }
 
   render() {
-    const { 
-      title,
-      description,
-      portionSize,
-      ingredients,
-      instructions,
-      showModal, 
-      showCollaborators 
-    } = this.state;
-
-    const isInvalid =
-      title === '' ||
-      description === '' ||
-      portionSize === 1 ||
-      ingredients.length === 0 ||
-      instructions.length === 0;
-
+    const { showModal, showCollaborators } = this.state;
     return (
       <div>
-        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
+        <Modal trigger={<Button icon labelPosition='left' onClick={() => this.setState({ showModal: true })}><Icon name="add" />Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
           <Modal.Header>Create a Recipe</Modal.Header>
           <Modal.Content image>
             <Image wrapped size='medium' src='https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_960_720.png' />
@@ -95,11 +79,11 @@ class RecipeCreate extends React.Component{
                 </Form.Input>
                 { showCollaborators 
                   ? <div>
-                      <Form.TextArea label='Collaborators (separate users by a new line)' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
+                      <Form.TextArea label='Collaborators ( Enter their email and please separate by a new line )' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
                     </div>
                   : null
                 } 
-                <Button disabled={isInvalid} type='submit' onClick={() => this.setState({ dateCreated: Date.now() })}>Submit</Button>
+                <Button type='submit' onClick={() => this.setState({ dateCreated: Date.now() })} color='green'>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>

@@ -33,26 +33,10 @@ class RecipeUpdate extends React.Component{
   }
 
   render() {
-    const { 
-      title,
-      description,
-      portionSize,
-      ingredients,
-      instructions,
-      showModal, 
-      showCollaborators 
-    } = this.state;
-
-    const isInvalid =
-      title === '' ||
-      description === '' ||
-      portionSize === 1 ||
-      ingredients.length === 0 ||
-      instructions.length === 0;
-
+    const { showModal, showCollaborators } = this.state;
     return (
       <div>
-        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Update Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
+        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })} color='yellow'>Update Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
           <Modal.Header>Edit Recipe</Modal.Header>
           <Modal.Content image>
             <Image wrapped size='medium' src='https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_960_720.png' />
@@ -75,7 +59,7 @@ class RecipeUpdate extends React.Component{
                     </div>
                   : null
                 } 
-                <Button disabled={isInvalid} type='submit'>Submit</Button>
+                <Button type='submit' color='green'>Submit</Button>
               </Form>
             </Modal.Description>
           </Modal.Content>

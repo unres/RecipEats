@@ -7,7 +7,7 @@ import SignInForm from '../SignIn';
 import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
-  <div>
+  <div> 
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? <NavigationAuth /> : <NavigationNonAuth />
@@ -17,13 +17,14 @@ const Navigation = () => (
 );
 
 const NavigationAuth = () => (
-  <Menu borderless size='massive'>
+  <Menu style={ {background: "#aed9e0"}} borderless size='massive'>
+    <Menu.Item header>RecipEats</Menu.Item>
     <SignOutButton />
   </Menu>
 );
 
 const NavigationNonAuth = () => (
-  <Menu borderless size='massive'>
+  <Menu style={ {background: "#aed9e0"}} class='test' borderless size='massive'>
     <Menu.Item header>RecipEats</Menu.Item>
      <Modal trigger={ <Menu.Item position='right' name='Sign In' /> }>
         <Modal.Content>
