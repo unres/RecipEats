@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Card, Icon, Modal, Header } from 'semantic-ui-react';
+import Likes from './likes.js'
+import { Card, Modal, Header, Icon } from 'semantic-ui-react';
 
 const RecipeCard = props => (
-  <Card>
-      <Modal closeIcon key={props.recipe.rid} trigger={
-                <Card >
+  
+      <Modal closeIcon trigger={
+                <Card key={props.recipe.rid}>
                     <Card.Content>
                         <Card.Header>{props.recipe.title}</Card.Header>
                     </Card.Content>
@@ -33,8 +34,10 @@ const RecipeCard = props => (
                         {props.recipe.instructions.split("\n").map((item, index) => <div key={index}>{(index + 1) + ": " + item}</div>)}
 
                 </Modal.Content>
+                <Modal.Actions>
+                    <Likes recipe={props.recipe}/>
+                </Modal.Actions>
+        </Modal>
 
-                </Modal>
-  </Card>
 );
 export default RecipeCard;

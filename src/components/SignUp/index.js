@@ -18,7 +18,7 @@ const INITIAL_STATE = {
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
+    <h1>Sign Up</h1>
     <SignUpForm />
   </div>
 );
@@ -94,16 +94,10 @@ class SignUpFormBase extends Component {
   }
 }
 
-const SignUpLink = () => (
-  <p>
-    Don't have an account? <Link to={ROUTES.LANDING}>Sign Up</Link>
-  </p>
-);
-
 const SignUpForm = compose(
     withRouter,
     withFirebase,
   )(SignUpFormBase);
 
 export default SignUpPage;
-export { SignUpForm, SignUpLink };
+export { SignUpForm };

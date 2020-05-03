@@ -48,11 +48,6 @@ const SideNavigationBar = () => (
             onClick={handleClick}
           />
         </Link>
-        <Link to={ROUTES.MEAL_PLANNER}>
-          <Menu.Item
-            name='Meal Planner'
-          />
-        </Link>
         <Link to={ROUTES.GROCERY_LIST}>
           <Menu.Item
            name='Grocery List'
