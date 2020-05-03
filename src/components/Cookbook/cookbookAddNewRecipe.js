@@ -45,7 +45,7 @@ class CookbookAddNewRecipe extends React.Component{
   }
 
   updateCookbook() {
-    this.setState = {recipes: [RID]};
+    this.setState({recipes: RID});
     return this.props.firebase.cookbook(this.state.cid)
     .set({
       ...this.state

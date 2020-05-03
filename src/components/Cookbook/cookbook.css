@@ -2,3 +2,11 @@
     margin-left: 210px;
     padding: 5px;
 }
+
+.buttons > div:nth-child(1){
+    margin-right: 8px;
+}
+
+.buttons > div:nth-child(2){
+    margin-right: 8px;
+} 

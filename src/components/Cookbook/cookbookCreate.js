@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, ModalHeader, Modal, ModalDescription, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Icon } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import '../Cookbook/cookbook.css'
 
 var CID = "01";
 const min = 1000;
@@ -62,17 +61,17 @@ class CookbookCreate extends React.Component{
 
   render() {
     return(
-      <div className='cookbook'>
-        <Modal closeIcon trigger={<Button size='massive'>Add New Cookbook</Button>}>
-          <ModalHeader>Create a Cookbook</ModalHeader>
-          <ModalDescription>
+      <div>
+        <Modal closeIcon trigger={<Button icon labelPosition='left' ><Icon name="add" />Add New Cookbook</Button>}>
+          <Modal.Header>Create a Cookbook</Modal.Header>
+          <Modal.Content>
             <Form onSubmit={this.onSubmit}>
               <Form.Input name='title' label='Title' placeholder='Title' onChange={this.onChange}></Form.Input>
               <Form.Input name='description' label='Description' placeholder='Description' onChange={this.onChange}></Form.Input>
               <Form.Radio name='public' label='Allow Public Access' onChange={this.toggleOnChange} toggle/>
               <Button type='submit'>Submit</Button>
             </Form>
-          </ModalDescription>
+          </Modal.Content>
         </Modal>
       </div>
     );
