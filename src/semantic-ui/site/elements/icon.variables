@@ -1,3 +1,14 @@
 /*******************************
     User Variable Overrides
 *******************************/
+@fontPath  : '../../semantic-ui/site/assets';
+
+@width: 1em;
+@height: 1em;
+
+@small: 13px;
+@medium: 16px;
+@large: 18px;
+@big : 20px;
+@huge: 28px;
+@massive: 32px;
