@@ -56,7 +56,7 @@ componentWillUnmount() {
 handleClick (event){
 var temp = []
 this.state.ingredientList.map(ingredient=>{if(ingredient!==event.target.id){temp.push(ingredient)}})
-this.setState({tempArray : temp})
+this.setState({ingredientList : temp})
 }
 
 testAdd(event){
