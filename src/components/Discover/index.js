@@ -28,7 +28,7 @@ class Discover extends React.Component{
       const publicRecies = [];
 
       recipesList.map(recipe => {
-        if ( recipe.share === true)
+        if ( recipe.public === true)
         publicRecies.push(recipe)
       });
 
@@ -36,17 +36,25 @@ class Discover extends React.Component{
         return (item1.dateCreated < item2.dateCreated)
       })
 
+      const tempNewRecipes = [];
+      showNewRecipes.forEach((item, index) => {if(index <= 4){tempNewRecipes.push(item)}});
+
+      
       const showMostLikedRecipes = publicRecies.sort(function(item1, item2) {
         return (item1.likes < item2.likes)
       });
+
+      const tempPopularRecipes = [];
+      showMostLikedRecipes.forEach((item, index) => {if(index <= 4){tempPopularRecipes.push(item)}});
+      
       //const showNewCookbooks = [];
       //const showMostLikedCookbooks = [];
 
       
 
       this.setState({
-          newRecipes: showNewRecipes,
-          mostLikedRecipes: showMostLikedRecipes,
+          newRecipes: tempNewRecipes,
+          mostLikedRecipes: tempPopularRecipes,
           loading: false            
       });
    });
@@ -82,7 +90,7 @@ componentWillUnmount() {
 const RecipeList = ({ recipes }) => (
   <Card.Group>
    {recipes.map(recipe=>(
-          <RecipeCard recipe={recipe} ></RecipeCard>
+          <RecipeCard recipe={recipe} key={recipe.rid}></RecipeCard>
         ))}
   </Card.Group>
 

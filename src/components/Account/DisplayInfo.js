@@ -1,5 +1,6 @@
 import React from 'react';
 import PasswordChangeForm from '../PasswordChange';
+import { Modal, Button, Menu, Icon } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 class DisplayInfo extends React.Component{
@@ -22,11 +23,17 @@ render(){
 
     return(
     <div>
+      <Menu>
+      <Modal closeIcon trigger={<Menu.Item><Button icon labelPosition='left'><Icon name='lock' />Change Password</Button></Menu.Item>}>
+          <Modal.Header>Change Password:</Modal.Header>
+          <Modal.Content>
+          <PasswordChangeForm />
+          </Modal.Content>
+      </Modal>
+      </Menu>
       <h1>Account Page</h1>
-      <h3>{this.state.userInfo.email}</h3>
-      <h4>{this.state.userInfo.fName + " " + this.state.userInfo.lName}</h4>
-      <h2>Change Password</h2>
-      <PasswordChangeForm />
+      <h3>Email: {this.state.userInfo.email}</h3>
+      <h3>Name: {this.state.userInfo.fName + " " + this.state.userInfo.lName}</h3>
     </div>
     )}
 
