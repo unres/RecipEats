@@ -56,33 +56,25 @@ componentWillUnmount() {
 handleClick (event){
 var temp = []
 this.state.ingredientList.map(ingredient=>{if(ingredient!==event.target.id){temp.push(ingredient)}})
-this.setState({ingredientList : temp})
+this.setState({tempArray : temp})
 }
 
 testAdd(event){
       var tempList = this.state.ingredientList;
       tempList.push(event.target.id);
-      this.setState({ingredientList: tempList, checked: !this.state.checked})
+      this.setState({tempArray: tempList})
   }
 
   handleSubmit = () =>{
-    console.log("here");
     var tempList = this.state.ingredientList;
-    this.state.tempArray.map(ingredient =>{
-      if(tempList.indexOf(ingredient) > -1){
-
-      }
-      else{
-        tempList.push(ingredient)
-      }
-    })
-    this.setState({ingredientList: tempList })
+    this.state.tempArray.map(item => {if(this.state.ingredientList.indexOf(item) <= -1 ){tempList.push(item)}})
+    this.setState({ingredientList : tempList, showModal2: false})
   }
 
 render(){
   const { showModal,ingredientList,recipes, showModal2} = this.state;
   return(  <div>
-    <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Add Item</Button>} closeIcon open={showModal}>
+    <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Add Item</Button>} closeIcon open={showModal} onClose={() => this.setState({showModal: false})}>
       <Modal.Content>
         <Form onSubmit={this.onSubmit}>
           <Form.Input name="addIngredient" onChange={this.onChange} label="Ingredient" placeholder="Ingredient" /> 
@@ -91,7 +83,7 @@ render(){
       </Modal.Content> 
     </Modal>
 
-    <Modal trigger={<Button onClick={() => this.setState({ showModal2: true })}>Add From Recipe</Button>} closeIcon open={showModal2}>
+    <Modal trigger={<Button onClick={() => this.setState({ showModal2: true })}>Add From Recipe</Button>} closeIcon open={showModal2} onClose={() => this.setState({showModal2: false})} >
       <Modal.Content>
         <RecipeList recipes={recipes} testAdd={this.testAdd} handleSubmit={this.handleSubmit}></RecipeList> 
       </Modal.Content> 
@@ -106,10 +98,10 @@ render(){
 }
 
 
-const RecipeList = ({ recipes, testAdd, handleSubmit }) => (
+const RecipeList = ({ recipes, handleSubmit, testAdd }) => (
   <div>
 {recipes.map(recipe => (
-       <Modal closeIcon key={recipe.rid} trigger={
+       <Modal key={recipe.rid} trigger={
                 <Card >
                     <Card.Content>
                         <Card.Header>{recipe.title}</Card.Header>
@@ -119,13 +111,13 @@ const RecipeList = ({ recipes, testAdd, handleSubmit }) => (
                     </Card.Content>
                 </Card>
                 }>
+        <Modal.Header>Select Ingredients to Add</Modal.Header>
         <Modal.Content>
-          <Form onSubmit={handleSubmit}>
-          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} onChange={testAdd} id={item} />)}
-          </Form>
-        </Modal.Content>
-        <Modal.Content extra>
+        <Form onSubmit={handleSubmit}>
+          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} id={item} value={item} onChange={testAdd}/>)}
+
           <Button type='submit'>Add</Button>
+        </Form>
         </Modal.Content>
         </Modal>
       ))}
