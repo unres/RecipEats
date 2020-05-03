@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Likes from './likes.js'
-import { Card, Modal, Header, Icon, Button } from 'semantic-ui-react';
+import { Card, Modal, Header, Icon } from 'semantic-ui-react';
 
 const RecipeCard = props => (
   
-      <Modal closeIcon key={props.recipe.rid} trigger={
-                <Card >
+      <Modal closeIcon trigger={
+                <Card key={props.recipe.rid}>
                     <Card.Content>
                         <Card.Header>{props.recipe.title}</Card.Header>
                     </Card.Content>
