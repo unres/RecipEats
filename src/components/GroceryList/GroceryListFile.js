@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Form, Card, Icon, List, Checkbox } from 'semantic-ui-react';
+import { Button, Modal, Form, Card, Icon, List, Checkbox, Menu } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 
@@ -56,7 +56,7 @@ componentWillUnmount() {
 handleClick (event){
 var temp = []
 this.state.ingredientList.map(ingredient=>{if(ingredient!==event.target.id){temp.push(ingredient)}})
-this.setState({tempArray : temp})
+this.setState({ingredientList : temp})
 }
 
 testAdd(event){
@@ -74,23 +74,27 @@ testAdd(event){
 render(){
   const { showModal,ingredientList,recipes, showModal2} = this.state;
   return(  <div>
-    <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Add Item</Button>} closeIcon open={showModal} onClose={() => this.setState({showModal: false})}>
+    <Menu>
+    <Modal trigger={<Menu.Item><Button icon labelPosition='left' onClick={() => this.setState({ showModal: true })}><Icon name="add" />Add Item</Button></Menu.Item>} closeIcon open={showModal} onClose={() => this.setState({showModal: false})}>
+      <Modal.Header>Enter the Item:</Modal.Header>
       <Modal.Content>
         <Form onSubmit={this.onSubmit}>
           <Form.Input name="addIngredient" onChange={this.onChange} label="Ingredient" placeholder="Ingredient" /> 
-          <Button type='submit' onClick={this.onSubmit}>Submit</Button>
+          <Button type='submit' onClick={this.onSubmit} color='green'>Submit</Button>
         </Form>
       </Modal.Content> 
     </Modal>
 
-    <Modal trigger={<Button onClick={() => this.setState({ showModal2: true })}>Add From Recipe</Button>} closeIcon open={showModal2} onClose={() => this.setState({showModal2: false})} >
+    <Modal trigger={<Menu.Item><Button icon labelPosition='left' onClick={() => this.setState({ showModal2: true })}><Icon name="add" />Add From Recipe</Button></Menu.Item>} closeIcon open={showModal2} onClose={() => this.setState({showModal2: false})} >
+      <Modal.Header>Select Recipe:</Modal.Header>
       <Modal.Content>
         <RecipeList recipes={recipes} testAdd={this.testAdd} handleSubmit={this.handleSubmit}></RecipeList> 
       </Modal.Content> 
     </Modal>
+    </Menu>
 
   <h1>Grocery List</h1>
-<List divided verticalAlign='middle'>{ingredientList.map(ingredient => (<List.Item>{ingredient}<List.Content floated='right'><Icon  id={ingredient} size='big' name="close" link onClick={this.handleClick}/></List.Content></List.Item>))}</List>
+<List divided verticalAlign='middle'>{ingredientList.map(ingredient => (<List.Item>{ingredient}<List.Content floated='right'><Icon  id={ingredient} color='red' size='big' name="close" link onClick={this.handleClick}/></List.Content></List.Item>))}</List>
 </div>)
 }
 
@@ -101,7 +105,7 @@ render(){
 const RecipeList = ({ recipes, handleSubmit, testAdd }) => (
   <div>
 {recipes.map(recipe => (
-       <Modal key={recipe.rid} trigger={
+       <Modal key={recipe.rid} closeIcon trigger={
                 <Card >
                     <Card.Content>
                         <Card.Header>{recipe.title}</Card.Header>
@@ -114,9 +118,10 @@ const RecipeList = ({ recipes, handleSubmit, testAdd }) => (
         <Modal.Header>Select Ingredients to Add</Modal.Header>
         <Modal.Content>
         <Form onSubmit={handleSubmit}>
-          {recipe.ingredients.split("\n").map((item, index) => <Checkbox key={index} label={item} id={item} value={item} onChange={testAdd}/>)}
-
-          <Button type='submit'>Add</Button>
+          <List key={recipe.rid}>
+          {recipe.ingredients.split("\n").map((item, index) =><List.Item><Checkbox key={index} label={item} id={item} value={item} onChange={testAdd}/> </List.Item>)}
+          </List>
+          <Button type='submit' color='green'>Add</Button>
         </Form>
         </Modal.Content>
         </Modal>
