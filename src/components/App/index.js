@@ -11,6 +11,7 @@ import GroceryList from '../GroceryList';
 import MealPlanner from '../MealPlanner';
 import AccountPage from '../Account';
 
+import './app.css';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 

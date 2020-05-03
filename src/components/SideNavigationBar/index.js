@@ -19,7 +19,7 @@ const SideNavigationBar = () => (
   );
 
   const SideNavigationAuth = () => (
-    <Menu vertical fixed='left' className='side-nav'>
+    <Menu style={ {background: "white"}} vertical fixed='left' className='side-nav'>
         <Link to={ROUTES.DISCOVER}>
           <Menu.Item
             name='Discover'
