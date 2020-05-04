@@ -77,10 +77,10 @@ class SignUpFormBase extends Component {
 
     return (
       <Form onSubmit={this.onSubmit}>
-          <Form.Input label="First Name" placeholder="Chad" name='fName' onChange={this.onChange} />
-          <Form.Input label="Last Name" placeholder="Tastic" name='lName' onChange={this.onChange} />
+          <Form.Input label="First Name" placeholder="First Name" name='fName' onChange={this.onChange} />
+          <Form.Input label="Last Name" placeholder="Last Name" name='lName' onChange={this.onChange} />
 
-        <Form.Input label="Email" placeholder="test@gmail.com" name='email' onChange={this.onChange} />
+        <Form.Input label="Email" placeholder="Email" name='email' onChange={this.onChange} />
 
          <Form.Input label="Password" placeholder="******" name='passwordOne' type='password' onChange={this.onChange} />
          <Form.Input label="Re-enter  Password" placeholder="******" name='passwordTwo' type='password' onChange={this.onChange} />
