@@ -15,6 +15,7 @@ class CookbookRead extends Component {
             cookbooks: [],
             userID: this.props.uid,
             recipeInCookbook: [],
+            email: this.props.email
         };
 
         this.setInitial = this.setInitial.bind(this);
@@ -54,7 +55,7 @@ class CookbookRead extends Component {
             const userCookbooks = [];
 
             cookbooksList.map(cookbook => {
-                if (cookbook.userID === this.state.userID) {
+                if (cookbook.userID === this.state.userID || (cookbook.collaborators != null && cookbook.collaborators.indexOf(this.state.email) > -1) ) {
                     userCookbooks.push(cookbook)
                 }
             });
@@ -89,6 +90,7 @@ class CookbookRead extends Component {
         const {cookbooks} = this.state;
         return(
             <div>
+                <h1>Your Recipes</h1>
                 <CookbookList cookbooks = {cookbooks} uid={this.state.userID} setInitial={this.setInitial} recipeInCookbook={this.state.recipeInCookbook} changeProp={this.changeProp} />
             </div>
         );

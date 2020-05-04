@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Form, Icon } from 'semantic-ui-react';
+import { Button, Modal, Form, Icon, Checkbox } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -12,7 +12,10 @@ const INITIAL_STATE = {
   description: '',
   // Default public access to false
   public: false,
-  recipes: ['']
+  recipes: [''],
+  share: false,
+  collaborators: [],
+  showCollaborators: false
 }
 
 class CookbookCreate extends React.Component{
@@ -60,6 +63,7 @@ class CookbookCreate extends React.Component{
   }
 
   render() {
+    const {   showCollaborators } = this.state;
     return(
       <div>
         <Modal closeIcon trigger={<Button icon labelPosition='left' ><Icon name="add" />Add New Cookbook</Button>}>
@@ -69,6 +73,15 @@ class CookbookCreate extends React.Component{
               <Form.Input name='title' label='Title' placeholder='Title' onChange={this.onChange}></Form.Input>
               <Form.Input name='description' label='Description' placeholder='Description' onChange={this.onChange}></Form.Input>
               <Form.Radio name='public' label='Allow Public Access' onChange={this.toggleOnChange} toggle/>
+              <Form.Input name='share' onChange={this.onChange}>
+                  <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
+                </Form.Input>
+                { showCollaborators 
+                  ? <div>
+                      <Form.TextArea label='Collaborators ( Enter their email and please separate by a new line )' placeholder='Collaborators' name='collaborators' onChange={this.onChange}  />
+                    </div>
+                  : null
+                } 
               <Button type='submit'>Submit</Button>
             </Form>
           </Modal.Content>

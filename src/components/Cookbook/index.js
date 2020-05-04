@@ -40,7 +40,7 @@ class Cookbook extends React.Component{
           <Menu><Menu.Item>
           <CookbookCreate uid = { this.state.authUser.uid } />
           </Menu.Item></Menu>
-          <CookbookRead uid = { this.state.authUser.uid } />
+          <CookbookRead uid = { this.state.authUser.uid } email={this.state.authUser.email} />
         </div>
         )
       }
