@@ -26,14 +26,6 @@ class Landing extends Component {
             </Grid.Column>
 
           </Grid.Row>
-          <Grid.Row columns={2}>
-            <GridColumn>
-              <Image src='/recipe.PNG'/>
-            </GridColumn>
-            <GridColumn>
-              <Image src='/recipe.PNG'/>
-            </GridColumn>
-          </Grid.Row>
        </Grid>
       </div>
    )
