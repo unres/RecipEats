@@ -76,12 +76,6 @@ componentWillUnmount() {
         <Header as='h2'>Most Liked Recipes</Header>
         {loading && <div>Loading...</div>}
         <RecipeList recipes = {mostLikedRecipes}></RecipeList>
-
-        <Header as='h2'>New Cookbooks</Header>
-        <Card >
-          <Card.Content header='Bell Family Desserts'/>
-          <Card.Content description='3 Generations of passed down desserts.'/>
-        </Card>
       </div>
     )
   }
