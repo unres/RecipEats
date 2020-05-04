@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
-import { Form, Modal } from 'semantic-ui-react';
+import { Form, Modal, Button } from 'semantic-ui-react';
 
 import { compose } from 'recompose';
 import { PasswordForgetForm } from '../PasswordForget';
 
-import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
@@ -14,7 +13,6 @@ const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
     <SignInForm />
-    <SignUpLink />
     <Modal  trigger={ <Link>Forgot Password?</Link>}>
       <Modal.Content>
        <PasswordForgetForm />
@@ -41,7 +39,7 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.COOKBOOK);
+        this.props.history.push(ROUTES.DISCOVER);
       })
       .catch(error => {
         this.setState({ error });
@@ -61,9 +59,9 @@ class SignInFormBase extends Component {
           <Form.Input name='email' placeholder='Billy@yahoo.com' label='Email'  onChange={this.onChange} />
           <Form.Input name='password' placeholder='******' label='Password' type='password' onChange={this.onChange} />
         
-          <button disabled={isInvalid} type="submit">
+          <Button disabled={isInvalid} type="submit">
           Sign In
-          </button>
+          </Button>
         {error && <p>{error.message}</p>}
       </Form>
     );

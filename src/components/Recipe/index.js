@@ -1,6 +1,7 @@
 import React from 'react';
 import RecipeCreate from './recipeCreate.js';
 import RecipeRead from './recipeRead.js';
+import { Menu } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 
 import './recipe.css';
@@ -38,7 +39,9 @@ class Recipe extends React.Component{
     else{
     return (
       <div className='recipe'>
+        <Menu><Menu.Item>
         <RecipeCreate uid={ this.state.authUser.uid } />
+        </Menu.Item></Menu>
         <RecipeRead uid={ this.state.authUser.uid } email={ this.state.authUser.email } />
       </div>
     )

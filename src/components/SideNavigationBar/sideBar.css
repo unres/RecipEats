@@ -1,3 +1,7 @@
 .ui.menu.fixed.side-nav {
     margin-top: 54px;
   }
+
+  .ui.vertical.tabular.menu .active.item{
+    background: #F1F3F5;
+  }

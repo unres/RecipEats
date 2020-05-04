@@ -28,7 +28,6 @@ class AccountPage extends React.Component{
 
 
 render(){
-  console.log(this.state.authUser)
   if(this.state.authUser === null){
     return (
       <div className='recipe'>
