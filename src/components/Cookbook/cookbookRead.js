@@ -115,13 +115,13 @@ const CookbookList = ({ cookbooks, uid, setInitial, recipeInCookbook, changeProp
                 <Modal.Header>{cookbook.title}</Modal.Header>
 
                 <Modal.Content>
-                    <LoopRecipes recipes={cookbook.recipeInCookbook}/>
+                    <LoopRecipes recipes={cookbook.recipesIncluded}/>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button.Group>
                         <CookbookUpdate cookbook={cookbook}/>
                         <CookbookDelete cid={cookbook.cid} />
-                        <ADDNewrecipe uid={uid} setInitial={setInitial} cookbook={cookbook} recipes={recipeInCookbook} changeProp={changeProp}/>
+                        <ADDNewrecipe uid={uid} setInitial={setInitial} cookbook={cookbook} recipes={recipeInCookbook} recipess={cookbook.recipesIncluded} changeProp={changeProp}/>
                     </Button.Group>
                 </Modal.Actions>
                 </Modal>
