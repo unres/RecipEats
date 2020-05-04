@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-import { Card, Modal, Button, Header } from 'semantic-ui-react';
+import { Card, Modal, Button } from 'semantic-ui-react';
 import CookbookDelete from './cookbookDelete.js';
 import CookbookUpdate from './cookbookUpdate.js';
 import '../Cookbook/cookbook.css'
-import CookbookAddNewRecipe from './cookbookAddNewRecipe';
+import ADDNewrecipe from './cookbookAddNewRecipe.js';
+import LoopRecipes from './loopRecipes.js';
 
 
 class CookbookRead extends Component {
@@ -13,7 +14,11 @@ class CookbookRead extends Component {
         this.state = {
             cookbooks: [],
             userID: this.props.uid,
+            recipeInCookbook: [],
         };
+
+        this.setInitial = this.setInitial.bind(this);
+        this.changeProp = this.changeProp.bind(this);
     }
 
     // componentDidMount() is invoked immediately after a component is mounted (inserted into the tree).
@@ -64,14 +69,27 @@ class CookbookRead extends Component {
     componentWillUnmount() {
         this.props.firebase.cookbooks().off();
     }
+
     
+    
+    // index of for specific cookbook ID, then add the rid to recipes of that specific one
+    setInitial = ( cookbook ,RID) => {
+        var temp = [];
+        temp.push(RID);
+        this.setState({recipeInCookbook: temp});
+    }
+
+    changeProp = (newArray)=>{     
+        this.setState({recipeInCookbook: newArray});
+    }
+        
+
     render() {
         // this.state.recipes is an array but also an object????
         const {cookbooks} = this.state;
-        
         return(
             <div>
-                <CookbookList cookbooks = {cookbooks} />
+                <CookbookList cookbooks = {cookbooks} uid={this.state.userID} setInitial={this.setInitial} recipeInCookbook={this.state.recipeInCookbook} changeProp={this.changeProp} />
             </div>
         );
     }
@@ -79,7 +97,7 @@ class CookbookRead extends Component {
 
 // Pass an object with cookbooks
 // Renders buttons for each cookbook
-const CookbookList = ({ cookbooks }) => (
+const CookbookList = ({ cookbooks, uid, setInitial, recipeInCookbook, changeProp }) => (
     <div>
         <Card.Group >
             {cookbooks.map(cookbook => (
@@ -97,14 +115,13 @@ const CookbookList = ({ cookbooks }) => (
                 <Modal.Header>{cookbook.title}</Modal.Header>
 
                 <Modal.Content>
-                    {/*Create card for each recipe in cookbook*/}
-                    <Header>{cookbook.recipes}</Header>
+                    <LoopRecipes recipes={cookbook.recipeInCookbook}/>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button.Group>
                         <CookbookUpdate cookbook={cookbook}/>
                         <CookbookDelete cid={cookbook.cid} />
-                        <CookbookAddNewRecipe obj={cookbook} />
+                        <ADDNewrecipe uid={uid} setInitial={setInitial} cookbook={cookbook} recipes={recipeInCookbook} changeProp={changeProp}/>
                     </Button.Group>
                 </Modal.Actions>
                 </Modal>

@@ -21,15 +21,14 @@ const INITIAL_STATE = {
   showCollaborators: false
 }
 
-class CookbookAddNewRecipe extends React.Component{
+class RecipeCreate extends React.Component{
   constructor(props) {
     super(props);
-    // recipes aren't getting passed
-    this.state = { ...INITIAL_STATE, userID: this.props.obj.userID, cid: this.props.obj.cid };
+
+    this.state = { ...INITIAL_STATE, userID: this.props.uid };
     this.writeToDB = this.writeToDB.bind(this);
-    this.updateCookbook = this.updateCookbook.bind(this);
   }
-  
+
   writeToDB() {
     return this.props.firebase.recipe(RID)
       .set({
@@ -44,22 +43,20 @@ class CookbookAddNewRecipe extends React.Component{
       });
   }
 
-  updateCookbook() {
-    var cid = this.state.cid;
-    this.setState({recipes: RID}, () => {
-      console.log(this.state);
-    });
-    return this.props.firebase.cookbook(cid)
-    .set({
-      ...this.state
-    })
-    .then(() => {
-      this.setState({ ...this.props.cookbook });
-      this.props.history.push(ROUTES.COOKBOOK);
-    })
-    .catch(error => {
-      this.setState({ error });
-    });
+  updateCookbook = ()=>{
+    if(typeof this.props.cookbook.recipes == "undefined"){
+      this.props.setInitial(this.props.cookbook, RID);
+    }
+    else{
+      var temp = this.props.recipes;
+      temp.push(RID);
+      this.props.changeProp(temp);
+    }
+    return this.props.firebase.cookbook(this.props.cookbook.cid)
+      .set({
+        ...this.props.cookbook,
+        recipesIncluded: this.props.recipes     
+      });
   }
 
   onSubmit = event => {
@@ -74,13 +71,13 @@ class CookbookAddNewRecipe extends React.Component{
 
   closeModal = () => {
     this.setState({ showModal: false })
-  };
+  }
 
   render() {
     const { showModal, showCollaborators } = this.state;
     return (
       <div>
-        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Add New Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
+        <Modal trigger={<Button onClick={() => this.setState({ showModal: true })}>Create a Recipe</Button>} closeIcon onClose={this.closeModal} open={showModal}>
           <Modal.Header>Create a Recipe</Modal.Header>
           <Modal.Content image>
             <Image wrapped size='medium' src='https://cdn.pixabay.com/photo/2014/12/21/23/28/recipe-575434_960_720.png' />
@@ -117,4 +114,4 @@ const generateRID = () => {
     RID = Date.now() + String( Math.floor(Math.random() * min));
 }
 
-export default withFirebase(CookbookAddNewRecipe);
+export default withFirebase(RecipeCreate);

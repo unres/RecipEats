@@ -3,7 +3,7 @@ import CookbookCreate from './cookbookCreate.js';
 import CookbookRead from './cookbookRead.js'
 import { withFirebase } from '../Firebase';
 import './cookbook.css';
-import cookbookAddNewRecipe from './cookbookAddNewRecipe.js';
+
 import { Menu } from 'semantic-ui-react';
 
 class Cookbook extends React.Component{
@@ -41,7 +41,6 @@ class Cookbook extends React.Component{
           <CookbookCreate uid = { this.state.authUser.uid } />
           </Menu.Item></Menu>
           <CookbookRead uid = { this.state.authUser.uid } />
-          <cookbookAddNewRecipe uid = {this.state.authUser.uid} />
         </div>
         )
       }

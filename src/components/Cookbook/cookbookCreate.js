@@ -12,7 +12,7 @@ const INITIAL_STATE = {
   description: '',
   // Default public access to false
   public: false,
-  recipes: []
+  recipes: ['']
 }
 
 class CookbookCreate extends React.Component{
