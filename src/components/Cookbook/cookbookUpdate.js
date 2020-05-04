@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Checkbox } from 'semantic-ui-react';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
@@ -41,6 +41,7 @@ class CookbookUpdate extends React.Component{
     
   
     render() {
+      const { showCollaborators } = this.state;
       return(
         <div>
           <Modal closeIcon trigger={<Button color="yellow">Update Cookbook</Button>}>
@@ -50,6 +51,15 @@ class CookbookUpdate extends React.Component{
                 <Form.Input name='title' label='Title' placeholder='Title' onChange={this.onChange} defaultValue={this.state.title}></Form.Input>
                 <Form.Input name='description' label='Description' placeholder='Description' onChange={this.onChange} defaultValue={this.state.description}></Form.Input>
                 <Form.Radio name='public' label='Allow Public Access' onChange={this.toggleOnChange} toggle/>
+                <Form.Input name='share' onChange={this.onChange}>
+                  <Checkbox label='Share recipe' onClick={() => { this.setState({ showCollaborators: !this.state.showCollaborators }); this.setState((prevState) => ({ share: !prevState.share }))}} checked={this.state.share} />
+                </Form.Input>
+                { showCollaborators 
+                  ? <div>
+                      <Form.TextArea label='Collaborators (separate users by a new line)' defaultValue={this.state.collaborators} name='collaborators' onChange={this.onChange}  />
+                    </div>
+                  : null
+                } 
                 <Button type='submit' color='green'>Submit</Button>
               </Form>
             </Modal.Content>
