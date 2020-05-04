@@ -18,7 +18,7 @@ class CookbookDelete extends Component {
     render() {
         return (
             <div>
-                <Button onClick={() => this.removeCookbook()}>Delete Cookbook</Button>
+                <Button color="red" onClick={() => this.removeCookbook()}>Delete Cookbook</Button>
             </div>
         );
     }

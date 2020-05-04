@@ -43,7 +43,7 @@ class CookbookUpdate extends React.Component{
     render() {
       return(
         <div>
-          <Modal closeIcon trigger={<Button>Update Cookbook</Button>}>
+          <Modal closeIcon trigger={<Button color="yellow">Update Cookbook</Button>}>
             <Modal.Header>Edit Cookbook</Modal.Header>
             <Modal.Content>
               <Form onSubmit={this.onSubmit}>
